@@ -8,6 +8,7 @@ points = PackedVector3Array(-0.40815973, 0, -1.7353631, -0.68003327, 0.2998042, 
 
 [node name="PlayerBoat3D" type="RigidBody3D"]
 script = ExtResource("1_q1liq")
+buoyancy_points = Array[NodePath]([NodePath("MarkerStarboard"), NodePath("MarkerPort"), NodePath("MarkerBow"), NodePath("MarkerStern"), NodePath("MarkerCentreline1"), NodePath("MarkerCentreline2"), NodePath("MarkerCentreline3"), NodePath("MarkerStarboard2"), NodePath("MarkerPort2")])
 
 [node name="boat-fishing-small2" parent="." instance=ExtResource("2_jt4t1")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
@@ -24,15 +25,30 @@ metadata/_edit_group_ = true
 transform = Transform3D(1, 0, 0, 0, 0.96592605, -0.25881904, 0, 0.2588191, 0.96592605, 0, 0, 0)
 
 [node name="MarkerStarboard" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88841486, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.3, -0.5)
+
+[node name="MarkerStarboard2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.7, 0.3, 1)
+
+[node name="MarkerCentreline1" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+
+[node name="MarkerCentreline2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -1)
+
+[node name="MarkerCentreline3" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 1)
 
 [node name="MarkerPort" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.888, 0.7, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.3, -0.5)
+
+[node name="MarkerPort2" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.7, 0.3, 1)
 
 [node name="MarkerBow" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -1.9345717)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, -1.6001092)
 
 [node name="MarkerStern" type="Marker3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 1.95)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 1.9308877)
 
 [editable path="boat-fishing-small2"]

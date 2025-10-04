@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=4 uid="uid://c0bspi8l275hg"]
+[gd_scene load_steps=13 format=4 uid="uid://c0bspi8l275hg"]
 
 [ext_resource type="PackedScene" uid="uid://m3g80ouamfem" path="res://player_boat_3d.tscn" id="1_io1bl"]
 [ext_resource type="PackedScene" uid="uid://8akpodld7xdq" path="res://ui.tscn" id="2_xb7om"]
@@ -19,15 +19,6 @@ sky = SubResource("Sky_xb7om")
 tonemap_mode = 2
 glow_enabled = true
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_io1bl"]
-albedo_color = Color(0, 0, 1, 1)
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_io1bl"]
-material = SubResource("StandardMaterial3D_io1bl")
-size = Vector2(1000, 1000)
-
-[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_io1bl"]
-
 [sub_resource type="BoxMesh" id="BoxMesh_io1bl"]
 size = Vector3(10, 5, 10)
 
@@ -37,9 +28,9 @@ points = PackedVector3Array(-5, -2.5, -5, -5, 2.5, -5, 5, -2.5, -5, -5, -2.5, 5,
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ipd2c"]
 render_priority = 0
 shader = ExtResource("3_4q1v8")
-shader_parameter/amplitude = 2.5
-shader_parameter/wavelength = 10.0
-shader_parameter/speed = 0.5
+shader_parameter/amplitude = 2.0
+shader_parameter/wavelength = 25.0
+shader_parameter/speed = 0.2
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ipd2c"]
 _surfaces = [{
@@ -56,6 +47,11 @@ _surfaces = [{
 
 [node name="3dMovement" type="Node3D"]
 
+[node name="WaveManager" type="Node" parent="."]
+script = ExtResource("4_a1khm")
+wavelength = 25.0
+speed = 0.2
+
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_4q1v8")
 
@@ -63,18 +59,12 @@ environment = SubResource("Environment_4q1v8")
 transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
 shadow_enabled = true
 
-[node name="PlayerBoat3D" parent="." instance=ExtResource("1_io1bl")]
+[node name="PlayerBoat3D" parent="." node_paths=PackedStringArray("wave_manager") instance=ExtResource("1_io1bl")]
 transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
-
-[node name="StaticSea" type="StaticBody3D" parent="."]
-visible = false
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticSea"]
-mesh = SubResource("PlaneMesh_io1bl")
-skeleton = NodePath("../..")
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticSea"]
-shape = SubResource("WorldBoundaryShape3D_io1bl")
+mass = 5.0
+wave_manager = NodePath("../WaveManager")
+buoyancy_force = 20.0
+water_drag = 5.0
 
 [node name="StaticIsland" type="StaticBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 31.557213)
@@ -93,9 +83,3 @@ material_override = SubResource("ShaderMaterial_ipd2c")
 mesh = SubResource("ArrayMesh_ipd2c")
 script = ExtResource("4_ipd2c")
 wave_manager = NodePath("../WaveManager")
-
-[node name="WaveManager" type="Node" parent="."]
-script = ExtResource("4_a1khm")
-amplitude = 2.5
-wavelength = 10.0
-speed = 0.5

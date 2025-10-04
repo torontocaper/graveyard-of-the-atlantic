@@ -1,9 +1,11 @@
+@tool
 extends Node
+class_name WaveManager
 
 @export var amplitude: float = 2.0
 @export var wavelength: float = 12.0
 @export var speed: float = 1.5
-@export var time: float = 0.0
+var time: float = 0.0
 
 func _process(delta: float) -> void:
 	time += delta

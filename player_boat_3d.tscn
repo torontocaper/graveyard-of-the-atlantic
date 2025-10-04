@@ -23,4 +23,16 @@ metadata/_edit_group_ = true
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]
 transform = Transform3D(1, 0, 0, 0, 0.96592605, -0.25881904, 0, 0.2588191, 0.96592605, 0, 0, 0)
 
+[node name="MarkerStarboard" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.88841486, 0.7, 0)
+
+[node name="MarkerPort" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.888, 0.7, 0)
+
+[node name="MarkerBow" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, -1.9345717)
+
+[node name="MarkerStern" type="Marker3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7, 1.95)
+
 [editable path="boat-fishing-small2"]

@@ -1,10 +1,13 @@
 @tool
 extends MeshInstance3D
 
-@onready var mat := material_override as ShaderMaterial
-
+@export_category("Grid settings")
 @export var grid_size: int = 100         # world size of the plane
 @export var grid_resolution: int = 50    # number of quads per side
+@export_category("Wave Manager")
+@export var wave_manager : WaveManager
+
+@onready var ocean_material := material_override as ShaderMaterial
 
 func _ready() -> void:
 	mesh = build_faceted_grid(grid_size, grid_resolution)
@@ -28,15 +31,15 @@ func build_faceted_grid(size: int, resolution: int) -> ArrayMesh:
 			var v01 = Vector3(-half + x * step, 0.0, -half + (z + 1) * step)
 			var v11 = Vector3(-half + (x + 1) * step, 0.0, -half + (z + 1) * step)
 
-			# First triangle (v00, v10, v11)
+			# ---- First triangle (v00, v10, v11) ----
 			var n1 = (v10 - v00).cross(v11 - v00).normalized()
 			verts.append_array([v00, v10, v11])
-			normals.append_array([n1, n1, n1])   # all three share the same normal
+			normals.append_array([n1, n1, n1])
 			uvs.append_array([Vector2(x, z), Vector2(x+1, z), Vector2(x+1, z+1)])
 			indices.append_array([index, index+1, index+2])
 			index += 3
 
-			# Second triangle (v00, v11, v01)
+			# ---- Second triangle (v00, v11, v01) ----
 			var n2 = (v11 - v00).cross(v01 - v00).normalized()
 			verts.append_array([v00, v11, v01])
 			normals.append_array([n2, n2, n2])
@@ -55,7 +58,8 @@ func build_faceted_grid(size: int, resolution: int) -> ArrayMesh:
 	return arr_mesh
 
 func _process(_delta: float) -> void:
-	mat.set_shader_parameter("amplitude", WaveManager.amplitude)
-	mat.set_shader_parameter("wavelength", WaveManager.wavelength)
-	mat.set_shader_parameter("speed", WaveManager.speed)
-	mat.set_shader_parameter("time", WaveManager.time)
+	if ocean_material:
+		ocean_material.set_shader_parameter("amplitude", wave_manager.amplitude)
+		ocean_material.set_shader_parameter("wavelength", wave_manager.wavelength)
+		ocean_material.set_shader_parameter("speed", wave_manager.speed)
+		ocean_material.set_shader_parameter("time", wave_manager.time)

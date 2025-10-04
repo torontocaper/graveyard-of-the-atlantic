@@ -15,10 +15,6 @@ run/main_scene="uid://c0bspi8l275hg"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 
-[autoload]
-
-WaveManager="*res://wave_manager.gd"
-
 [display]
 
 window/size/viewport_width=1280

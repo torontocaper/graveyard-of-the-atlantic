@@ -107,7 +107,8 @@ func _physics_process(_delta: float) -> void:
 	apply_central_force(drag)
 
 	# -------- Telemetry --------
-	var speed := linear_velocity.length()
+	var planar_vel = Vector3(linear_velocity.x, 0.0, linear_velocity.z)
+	var speed = planar_vel.length()
 	var flat_fwd := Vector3(fwd.x, 0.0, fwd.z)
 	if flat_fwd.length_squared() > 0.000001:
 		flat_fwd = flat_fwd.normalized()

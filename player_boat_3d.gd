@@ -57,6 +57,8 @@ func _ready() -> void:
 		var m = get_node_or_null(path)
 		if m:
 			_markers.append(m)
+	global_position.y = wave_manager.get_wave_height(global_position.x, global_position.z)
+
 
 func _physics_process(_delta: float) -> void:
 	# -------- Buoyancy --------

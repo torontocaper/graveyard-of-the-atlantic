@@ -1,7 +1,8 @@
 @tool
 extends MeshInstance3D
 ## Procedurally builds a faceted ocean mesh using SurfaceTool.
-## Each triangle has its own vertices and per-face normal, guaranteeing flat shading.
+## Each triangle has unique vertices and per-face normals, guaranteeing flat shading.
+## Adds diagonal flipping per quad to prevent identical triangle pairs.
 
 @export var wave_manager: WaveManager
 @export_category("Grid settings")
@@ -13,6 +14,7 @@ extends MeshInstance3D
 
 func _ready() -> void:
 	mesh = build_faceted_grid(grid_size, grid_resolution)
+
 
 func build_faceted_grid(size: int, resolution: int) -> ArrayMesh:
 	var st := SurfaceTool.new()
@@ -28,19 +30,27 @@ func build_faceted_grid(size: int, resolution: int) -> ArrayMesh:
 			var v01 := Vector3(-half + x * step, 0.0, -half + (z + 1) * step)
 			var v11 := Vector3(-half + (x + 1) * step, 0.0, -half + (z + 1) * step)
 
-			# First triangle
-			_add_triangle(st, v00, v10, v11)
-			# Second triangle
-			_add_triangle(st, v00, v11, v01)
+			# Alternate diagonal direction every other tile to break quad symmetry
+			var flip_diagonal := (x + z) % 2 == 0
+
+			if flip_diagonal:
+				# Diagonal runs from top-left to bottom-right
+				_add_triangle(st, v00, v10, v11)
+				_add_triangle(st, v00, v11, v01)
+			else:
+				# Diagonal runs from bottom-left to top-right
+				_add_triangle(st, v00, v10, v01)
+				_add_triangle(st, v10, v11, v01)
 
 	var new_mesh := st.commit()
 	return new_mesh
 
 
 func _add_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
-	## Compute a flat normal for the face
+	## Compute a flat normal for the triangle and assign a random debug color.
 	var normal := Plane(a, b, c).normal
-	var color := Color(randf(), randf(), randf())
+	var color := Color(randf(), randf(), randf()) # optional, helps visualize triangles
+
 	for v in [a, b, c]:
 		st.set_normal(normal)
 		st.set_color(color)
@@ -48,6 +58,7 @@ func _add_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
 
 
 func _process(_delta: float) -> void:
+	## Pass dynamic parameters to the ocean shader each frame.
 	if mat and wave_manager:
 		mat.set_shader_parameter("wavelength", wave_manager.wavelength)
 		mat.set_shader_parameter("time", wave_manager.time)

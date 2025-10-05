@@ -27,7 +27,7 @@ points = PackedVector3Array(-5, -2.5, -5, -5, 2.5, -5, 5, -2.5, -5, -5, -2.5, 5,
 render_priority = 0
 shader = ExtResource("3_ipd2c")
 shader_parameter/wavelength = 25.0
-shader_parameter/time = 842.0172378892928
+shader_parameter/time = 1729.9595725511292
 shader_parameter/waves = Array[Vector4]([Vector4(1, 0, 0.7, 1), Vector4(0, 1, 0.5, 0.8), Vector4(0.7, 0.7, 0.4, 1.3)])
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_ipd2c"]

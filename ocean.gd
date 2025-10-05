@@ -1,59 +1,54 @@
 @tool
 extends MeshInstance3D
-
+## Procedurally builds a faceted ocean mesh using SurfaceTool.
+## Each triangle has its own vertices and per-face normal, guaranteeing flat shading.
 
 @export var wave_manager: WaveManager
 @export_category("Grid settings")
 @export var grid_size: int = 100
 @export var grid_resolution: int = 50
 
-@onready var mat := material_override as ShaderMaterial
+@onready var mat: ShaderMaterial = material_override as ShaderMaterial
+
 
 func _ready() -> void:
 	mesh = build_faceted_grid(grid_size, grid_resolution)
 
 func build_faceted_grid(size: int, resolution: int) -> ArrayMesh:
-	var arrays = []
-	var verts = PackedVector3Array()
-	var normals = PackedVector3Array()
-	var uvs = PackedVector2Array()
-	var indices = PackedInt32Array()
+	var st := SurfaceTool.new()
+	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	var half = float(size) / 2.0
-	var step = float(size) / float(resolution)
+	var half := float(size) / 2.0
+	var step := float(size) / float(resolution)
 
-	var index = 0
 	for x in range(resolution):
 		for z in range(resolution):
-			var v00 = Vector3(-half + x * step, 0.0, -half + z * step)
-			var v10 = Vector3(-half + (x + 1) * step, 0.0, -half + z * step)
-			var v01 = Vector3(-half + x * step, 0.0, -half + (z + 1) * step)
-			var v11 = Vector3(-half + (x + 1) * step, 0.0, -half + (z + 1) * step)
+			var v00 := Vector3(-half + x * step, 0.0, -half + z * step)
+			var v10 := Vector3(-half + (x + 1) * step, 0.0, -half + z * step)
+			var v01 := Vector3(-half + x * step, 0.0, -half + (z + 1) * step)
+			var v11 := Vector3(-half + (x + 1) * step, 0.0, -half + (z + 1) * step)
 
-			verts.append_array([v00, v10, v11])
-			normals.append_array([Vector3.UP, Vector3.UP, Vector3.UP])
-			uvs.append_array([Vector2(x, z), Vector2(x+1, z), Vector2(x+1, z+1)])
-			indices.append_array([index, index+1, index+2])
-			index += 3
+			# First triangle
+			_add_triangle(st, v00, v10, v11)
+			# Second triangle
+			_add_triangle(st, v00, v11, v01)
 
-			verts.append_array([v00, v11, v01])
-			normals.append_array([Vector3.UP, Vector3.UP, Vector3.UP])
-			uvs.append_array([Vector2(x, z), Vector2(x+1, z+1), Vector2(x, z+1)])
-			indices.append_array([index, index+1, index+2])
-			index += 3
+	var new_mesh := st.commit()
+	return new_mesh
 
-	arrays.resize(Mesh.ARRAY_MAX)
-	arrays[Mesh.ARRAY_VERTEX] = verts
-	arrays[Mesh.ARRAY_NORMAL] = normals
-	arrays[Mesh.ARRAY_TEX_UV] = uvs
-	arrays[Mesh.ARRAY_INDEX] = indices
 
-	var arr_mesh = ArrayMesh.new()
-	arr_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, arrays)
-	return arr_mesh
+func _add_triangle(st: SurfaceTool, a: Vector3, b: Vector3, c: Vector3) -> void:
+	## Compute a flat normal for the face
+	var normal := Plane(a, b, c).normal
+	var color := Color(randf(), randf(), randf())
+	for v in [a, b, c]:
+		st.set_normal(normal)
+		st.set_color(color)
+		st.add_vertex(v)
+
 
 func _process(_delta: float) -> void:
-	if mat:
+	if mat and wave_manager:
 		mat.set_shader_parameter("wavelength", wave_manager.wavelength)
 		mat.set_shader_parameter("time", wave_manager.time)
 		mat.set_shader_parameter("waves", wave_manager.waves)

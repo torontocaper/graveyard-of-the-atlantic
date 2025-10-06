@@ -1,5 +1,5 @@
 shader_type spatial;
-render_mode unshaded, cull_disabled;
+render_mode cull_disabled;
 
 uniform float wavelength = 12.0;
 uniform float time = 0.0;

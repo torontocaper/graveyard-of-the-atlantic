@@ -1,0 +1,29 @@
+[gd_scene load_steps=4 format=3 uid="uid://wa0310kj7mpc"]
+
+[ext_resource type="Script" uid="uid://dse0rm76xth36" path="res://lighthouse.gd" id="1_g4l8x"]
+[ext_resource type="PackedScene" uid="uid://dw1jg2giri11o" path="res://assets/lighthouse-mesh.glb" id="1_rolx0"]
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_rolx0"]
+points = PackedVector3Array(-0.000169456, -2, 1, -0.8660254, -2, 0.49980426, 0.865856, -2, 0.49980426, 0.494896, 2.1997066, 0.49491, -0.000169456, 2.1997066, 0.6998825, -0.49506536, 2.1997066, 0.49491, -0.8660254, -2, -0.50019574, -0.70004284, 2.1997066, -0.00019574165, 0.865856, -2, -0.50019574, 0.6998735, 2.1997066, -0.00019574165, 0.43284327, 2.6000004, 0.24980426, 0.24990648, 2.6000004, 0.43285048, -0.000169456, 2.6000004, 0.49980426, -0.25007582, 2.6000004, 0.43285048, -0.43318218, 2.6000004, 0.24980426, -0.49506536, 2.1997066, -0.49510574, -0.000169456, -2, -1, -0.50015163, 2.6000004, -0.00019574165, -0.43318218, 2.6000004, -0.25019574, 0.494896, 2.1997066, -0.49510574, 0.43284327, 2.6000004, -0.25019574, 0.49981278, 2.6000004, -0.00019574165, -0.000169456, 2.1997066, -0.7000783, -0.25007582, 2.6000004, -0.43304622, 0.24990648, 2.6000004, -0.43304622, -0.000169456, 2.6000004, -0.50019574)
+
+[node name="Lighthouse" type="StaticBody3D"]
+script = ExtResource("1_g4l8x")
+
+[node name="lighthouse-mesh" parent="." instance=ExtResource("1_rolx0")]
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="."]
+shape = SubResource("ConvexPolygonShape3D_rolx0")
+
+[node name="LightPivot" type="Node3D" parent="."]
+transform = Transform3D(-0.09646785, 0, 0.99534905, 0, 1, 0, -0.99534905, 0, -0.09646785, 0, 0, 0)
+
+[node name="Spotlight" type="SpotLight3D" parent="LightPivot"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.5)
+light_color = Color(1, 0.95686275, 0.8, 1)
+light_energy = 20.0
+light_volumetric_fog_energy = 2.0
+light_specular = 1.0
+spot_range = 200.0
+spot_angle = 5.0
+
+[editable path="lighthouse-mesh"]

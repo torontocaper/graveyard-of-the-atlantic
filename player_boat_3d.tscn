@@ -18,7 +18,7 @@ transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0
 shape = SubResource("ConvexPolygonShape3D_jt4t1")
 
 [node name="SpringArm3D" type="SpringArm3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.70710665, 0.7071067, 0, -0.7071067, 0.70710665, 0, 4, 4)
+transform = Transform3D(1, 0, 0, 0, 0.8660252, 0.49999994, 0, -0.49999994, 0.8660252, 0, 3, 4)
 metadata/_edit_group_ = true
 
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D"]

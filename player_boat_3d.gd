@@ -52,13 +52,16 @@ var _last_emitted_speed := -1.0
 var _last_emitted_heading := -1.0
 
 func _ready() -> void:
+	body_entered.connect(_on_collision)
 	# Cache buoyancy markers
 	for path in buoyancy_points:
 		var m = get_node_or_null(path)
 		if m:
 			_markers.append(m)
 	global_position.y = wave_manager.get_wave_height(global_position.x, global_position.z)
-
+	
+func _on_collision(_colliding_body):
+	buoyancy_force = 0.0
 
 func _physics_process(_delta: float) -> void:
 	# -------- Buoyancy --------

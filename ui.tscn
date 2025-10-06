@@ -1,18 +1,60 @@
-[gd_scene load_steps=2 format=3 uid="uid://8akpodld7xdq"]
+[gd_scene load_steps=4 format=3 uid="uid://8akpodld7xdq"]
 
 [ext_resource type="Script" uid="uid://cd12reo7npqm0" path="res://ui.gd" id="1_fyqef"]
+[ext_resource type="FontFile" uid="uid://b4n7vji3yo867" path="res://assets/fonts/PirataOne-Regular.ttf" id="2_m6e0p"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e0p"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_fyqef")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="Stats" type="VBoxContainer" parent="."]
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="SpeedLabel" type="Label" parent="VBoxContainer"]
+[node name="SpeedLabel" type="Label" parent="Stats"]
 layout_mode = 2
 text = "Speed = 0.0 px/s"
 
-[node name="HeadingLabel" type="Label" parent="VBoxContainer"]
+[node name="HeadingLabel" type="Label" parent="Stats"]
 layout_mode = 2
 text = "Heading = (0.0, 0.0)"
+
+[node name="TitlePanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_m6e0p")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="TitlePanel"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="TitleLabel" type="Label" parent="TitlePanel/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 1)
+theme_override_constants/line_spacing = -32
+theme_override_constants/shadow_offset_x = 16
+theme_override_constants/shadow_offset_y = 16
+theme_override_fonts/font = ExtResource("2_m6e0p")
+theme_override_font_sizes/font_size = 256
+text = "Graveyard of the Atlantic"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="AuthorLabel" type="Label" parent="TitlePanel/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 1)
+theme_override_colors/font_shadow_color = Color(1, 1, 1, 1)
+theme_override_constants/shadow_offset_x = 2
+theme_override_constants/shadow_offset_y = 2
+theme_override_fonts/font = ExtResource("2_m6e0p")
+theme_override_font_sizes/font_size = 48
+text = "by torontocaper"
+horizontal_alignment = 1
+vertical_alignment = 1

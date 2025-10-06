@@ -15,15 +15,30 @@ script = ExtResource("1_g4l8x")
 shape = SubResource("ConvexPolygonShape3D_rolx0")
 
 [node name="LightPivot" type="Node3D" parent="."]
-transform = Transform3D(-0.09646785, 0, 0.99534905, 0, 1, 0, -0.99534905, 0, -0.09646785, 0, 0, 0)
+transform = Transform3D(0.09628093, 0, -0.9953877, 0, 1, 0, 0.9953877, 0, 0.09628093, 0, 0, 0)
 
 [node name="Spotlight" type="SpotLight3D" parent="LightPivot"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.5)
 light_color = Color(1, 0.95686275, 0.8, 1)
-light_energy = 20.0
-light_volumetric_fog_energy = 2.0
+light_energy = 1000.0
+light_indirect_energy = 2.0
 light_specular = 1.0
+shadow_enabled = true
+shadow_opacity = 0.5
+shadow_blur = 4.0
 spot_range = 200.0
-spot_angle = 5.0
+spot_angle = 30.0
+
+[node name="Spotlight2" type="SpotLight3D" parent="LightPivot"]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.5, 0.5)
+light_color = Color(1, 0.95686275, 0.8, 1)
+light_energy = 1000.0
+light_indirect_energy = 2.0
+light_specular = 1.0
+shadow_enabled = true
+shadow_opacity = 0.5
+shadow_blur = 4.0
+spot_range = 200.0
+spot_angle = 30.0
 
 [editable path="lighthouse-mesh"]

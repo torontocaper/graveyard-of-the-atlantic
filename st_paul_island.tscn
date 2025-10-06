@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://dbu24ifbpic0j"]
+
+[ext_resource type="PackedScene" uid="uid://du6qwsj7pqp8p" path="res://assets/st-paul-island.glb" id="1_2707i"]
+
+[node name="StPaulIsland" type="Node3D"]
+
+[node name="st-paul-island" parent="." instance=ExtResource("1_2707i")]
+
+[editable path="st-paul-island"]

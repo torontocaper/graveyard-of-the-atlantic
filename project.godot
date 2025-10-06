@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="trijam-340-lighthouse-alpha"
-run/main_scene="uid://c0bspi8l275hg"
+run/main_scene="uid://u8sfsqyn1w1w"
 config/features=PackedStringArray("4.5", "Forward Plus")
 boot_splash/image="uid://b8w1lhnc0fr4y"
 config/icon="res://icon.svg"

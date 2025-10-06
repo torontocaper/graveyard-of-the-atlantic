@@ -15,10 +15,11 @@ class_name PlayerBoat3D
 # -------------------------- Signals --------------------------
 signal speed_changed(value: float)
 signal heading_changed(value: float)  # 0 = North (+Z), 90 = East (+X), etc.
+signal crashed
 
 # -------------------------- Forces ---------------------------
 @export_category("Forces")
-@export_range(0.0, 1000.0, 0.1) var thrust_force: float = 20.0
+@export_range(0.0, 1000.0, 0.1) var thrust_force: float = 30.0
 @export_range(0.0, 1000.0, 0.1) var turn_torque: float = 10.0
 
 # -------------------------- Steering -------------------------
@@ -35,7 +36,7 @@ signal heading_changed(value: float)  # 0 = North (+Z), 90 = East (+X), etc.
 @export_category("Buoyancy")
 @export var wave_manager: WaveManager
 @export var buoyancy_points: Array[NodePath] = []      # Marker3D children around hull
-@export var buoyancy_force: float = 2.0               # force multiplier
+@export var buoyancy_force: float = 15.0               # force multiplier
 @export var water_drag: float = 2.0                    # damping factor
 
 var _markers: Array[Marker3D] = []
@@ -51,6 +52,8 @@ const ZERO := Vector3.ZERO
 var _last_emitted_speed := -1.0
 var _last_emitted_heading := -1.0
 
+@onready var camera_3d: Camera3D = $SpringArm3D/Camera3D
+
 func _ready() -> void:
 	body_entered.connect(_on_collision)
 	# Cache buoyancy markers
@@ -62,8 +65,12 @@ func _ready() -> void:
 	
 func _on_collision(_colliding_body):
 	buoyancy_force = 0.0
+	crashed.emit()
+	camera_3d.reparent(self.get_parent())
 
 func _physics_process(_delta: float) -> void:
+	
+	
 	# -------- Buoyancy --------
 	for marker in _markers:
 		var pos = marker.global_transform.origin

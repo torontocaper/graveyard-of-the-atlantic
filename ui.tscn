@@ -6,10 +6,10 @@
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e0p"]
 
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nltto"]
+
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_27fn8"]
 bg_color = Color(0.6, 0.6, 0.6, 0.5019608)
-
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_nltto"]
 
 [node name="UI" type="CanvasLayer"]
 script = ExtResource("1_fyqef")
@@ -65,33 +65,6 @@ text = "by torontocaper"
 horizontal_alignment = 1
 vertical_alignment = 1
 
-[node name="DeathPanel" type="Panel" parent="."]
-visible = false
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme_override_styles/panel = SubResource("StyleBoxFlat_27fn8")
-
-[node name="DeathLabel" type="Label" parent="DeathPanel"]
-custom_minimum_size = Vector2(1280, 720)
-layout_mode = 0
-offset_right = 40.0
-offset_bottom = 23.0
-theme_override_colors/font_color = Color(0, 0, 0, 0.6666667)
-theme_override_constants/line_spacing = -32
-theme_override_fonts/font = ExtResource("2_m6e0p")
-theme_override_font_sizes/font_size = 256
-text = "Welcome to the Graveyard"
-horizontal_alignment = 1
-vertical_alignment = 1
-autowrap_mode = 2
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("3_27fn8")
-autoplay = true
-
 [node name="VictoryPanel" type="Panel" parent="."]
 anchors_preset = 15
 anchor_right = 1.0
@@ -100,7 +73,7 @@ grow_horizontal = 2
 grow_vertical = 2
 theme_override_styles/panel = SubResource("StyleBoxFlat_nltto")
 
-[node name="Label" type="Label" parent="VictoryPanel"]
+[node name="VictoryLabel" type="Label" parent="VictoryPanel"]
 layout_mode = 1
 anchors_preset = 15
 anchor_right = 1.0
@@ -110,9 +83,57 @@ grow_vertical = 2
 theme_override_constants/line_spacing = -32
 theme_override_constants/paragraph_spacing = 16
 theme_override_fonts/font = ExtResource("2_m6e0p")
-theme_override_font_sizes/font_size = 192
+theme_override_font_sizes/font_size = 128
 text = "Success! 
-You made it to shore."
+You made it to shore in #.##s."
 horizontal_alignment = 1
 vertical_alignment = 1
 autowrap_mode = 2
+
+[node name="DeathPanel" type="Panel" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_styles/panel = SubResource("StyleBoxFlat_27fn8")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="DeathPanel"]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -640.0
+offset_top = -285.0
+offset_right = 640.0
+offset_bottom = 285.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="DeathLabel" type="Label" parent="DeathPanel/VBoxContainer"]
+custom_minimum_size = Vector2(1280, 0)
+layout_mode = 2
+theme_override_colors/font_color = Color(0, 0, 0, 0.6666667)
+theme_override_constants/line_spacing = -32
+theme_override_fonts/font = ExtResource("2_m6e0p")
+theme_override_font_sizes/font_size = 192
+text = "Welcome to the Graveyard"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="PlayAgainButton" type="Button" parent="DeathPanel/VBoxContainer"]
+custom_minimum_size = Vector2(400, 0)
+layout_mode = 2
+size_flags_horizontal = 4
+theme_override_fonts/font = ExtResource("2_m6e0p")
+theme_override_font_sizes/font_size = 72
+text = "Play Again?"
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("3_27fn8")
+autoplay = true
+
+[connection signal="pressed" from="DeathPanel/VBoxContainer/PlayAgainButton" to="." method="_on_play_again_button_pressed"]

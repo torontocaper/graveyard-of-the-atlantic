@@ -16,10 +16,10 @@ rotation_speed = 15.0
 shape = SubResource("ConvexPolygonShape3D_rolx0")
 
 [node name="LightPivot" type="Node3D" parent="."]
-transform = Transform3D(0.6301417, 0, -0.77553445, 0, 1, 0, 0.77553445, 0, 0.6301417, 0, 0, 0)
+transform = Transform3D(0.98544604, 0, 0.16453439, 0, 1, 0, -0.16453439, 0, 0.98544604, 0, 0, 0)
 
 [node name="Spotlight" type="SpotLight3D" parent="LightPivot"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2.5, -0.25)
+transform = Transform3D(1, 0, 0, 0, 0.9848077, 0.17364818, 0, -0.17364818, 0.9848077, 0, 2.5, -0.25)
 light_color = Color(1, 0.9137255, 0.69411767, 1)
 light_energy = 250.0
 light_indirect_energy = 4.0
@@ -32,7 +32,7 @@ spot_range = 500.0
 spot_angle = 5.0
 
 [node name="Spotlight3" type="SpotLight3D" parent="LightPivot"]
-transform = Transform3D(-4.371139e-08, 0, -1, 0, 1, 0, 1, 0, -4.371139e-08, 0.25, 2.5, 0)
+transform = Transform3D(-4.371139e-08, 0.17364818, -0.9848077, 0, 0.9848077, 0.17364818, 1, 7.590403e-09, -4.304731e-08, 0.25, 2.5, 0)
 light_color = Color(1, 0.9137255, 0.69411767, 1)
 light_energy = 250.0
 light_indirect_energy = 4.0
@@ -45,7 +45,7 @@ spot_range = 500.0
 spot_angle = 5.0
 
 [node name="Spotlight4" type="SpotLight3D" parent="LightPivot"]
-transform = Transform3D(-4.371139e-08, 0, 1, 0, 1, 0, -1, 0, -4.371139e-08, 0.25, 2.5, 0)
+transform = Transform3D(-4.371139e-08, -0.17364818, 0.9848077, 0, 0.9848077, 0.17364818, -1, 7.590403e-09, -4.304731e-08, 0.25, 2.5, 0)
 light_color = Color(1, 0.9137255, 0.69411767, 1)
 light_energy = 250.0
 light_indirect_energy = 4.0
@@ -58,7 +58,7 @@ spot_range = 500.0
 spot_angle = 5.0
 
 [node name="Spotlight2" type="SpotLight3D" parent="LightPivot"]
-transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 2.5, 0.25)
+transform = Transform3D(-1, 2.6220146e-08, -1.4870183e-07, 0, 0.9848077, 0.17364818, 1.509958e-07, 0.17364818, -0.9848077, 0, 2.5, 0.25)
 light_color = Color(1, 0.9137255, 0.69411767, 1)
 light_energy = 250.0
 light_indirect_energy = 4.0

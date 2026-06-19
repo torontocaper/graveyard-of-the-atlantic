@@ -1,6 +1,6 @@
-[gd_scene load_steps=4 format=3 uid="uid://m3g80ouamfem"]
+[gd_scene format=3 uid="uid://m3g80ouamfem"]
 
-[ext_resource type="Script" uid="uid://baw0cxhburv0u" path="res://player_boat_3d.gd" id="1_q1liq"]
+[ext_resource type="Script" uid="uid://baw0cxhburv0u" path="res://src/player_boat_3d.gd" id="1_q1liq"]
 [ext_resource type="PackedScene" uid="uid://bo0deg7ajcsuv" path="res://assets/boat-fishing-small.glb" id="2_jt4t1"]
 
 [sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_jt4t1"]

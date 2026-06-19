@@ -1,8 +1,8 @@
-[gd_scene load_steps=7 format=3 uid="uid://8akpodld7xdq"]
+[gd_scene format=3 uid="uid://8akpodld7xdq"]
 
-[ext_resource type="Script" uid="uid://cd12reo7npqm0" path="res://ui.gd" id="1_fyqef"]
+[ext_resource type="Script" uid="uid://cd12reo7npqm0" path="res://src/ui.gd" id="1_fyqef"]
 [ext_resource type="FontFile" uid="uid://b4n7vji3yo867" path="res://assets/fonts/PirataOne-Regular.ttf" id="2_m6e0p"]
-[ext_resource type="AudioStream" uid="uid://b1ycwdop7x5ig" path="res://assets/the-lonely-instrument-series-fiddle-played-by-andy-leftwich-13355.wav" id="3_27fn8"]
+[ext_resource type="AudioStream" uid="uid://b1ycwdop7x5ig" path="res://assets/audio/the-lonely-instrument-series-fiddle-played-by-andy-leftwich-13355.wav" id="3_27fn8"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m6e0p"]
 

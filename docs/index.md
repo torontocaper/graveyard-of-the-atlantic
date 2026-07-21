@@ -2,7 +2,7 @@
 
 Submission for Trijam 340 ("Lighthouse")
 
-[title screen](/title-screen.png)
+![title screen](/title-screen.png)
 
 ## Attributions
 

@@ -1,0 +1,5 @@
+title: Graveyard of the Atlantic
+description: An atmospheric 3D sailing game made in Godot by torontocaper
+remote_theme: pages-themes/hacker@v0.2.0
+plugins:
+- jekyll-remote-theme

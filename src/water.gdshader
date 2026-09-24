@@ -1,6 +1,4 @@
 shader_type spatial;
-//render_mode specular_toon;
-render_mode world_vertex_coords;
 
 uniform float x_amplitude;
 uniform float x_frequency;
@@ -10,31 +8,44 @@ uniform float z_amplitude;
 uniform float z_frequency;
 uniform float z_speed;
 
-float get_height(vec2 coords) {
-	float x_wave_value = x_amplitude * sin( (2.0 * PI * x_frequency) * ( ( coords.x + TIME ) * x_speed ));
-	float z_wave_value = z_amplitude * sin( (2.0 * PI * z_frequency) * ( ( coords.y + TIME ) * z_speed ));
-	float height_value = x_wave_value + z_wave_value;
-	return height_value;
+uniform float diagonal_amplitude;
+uniform float diagonal_frequency;
+uniform float diagonal_speed;
+
+varying flat vec3 my_vertex;
+
+float random_x(vec2 xz_coords) {
+	return fract(
+		sin(dot(xz_coords, vec2(12.9898, 78.233)))
+		* 43758.5453
+	);
 }
 
-varying flat vec3 my_normal;
+float random_z(vec2 xz_coords) {
+	return fract(
+		sin(dot(xz_coords, vec2(39.3468, 11.135)))
+		* 24634.6345
+	);
+}
+
+float get_height_offset(float x_coord, float z_coord) {
+	float x_wave_value = x_amplitude * sin( (2.0 * PI * x_frequency) * ( x_coord + TIME * x_speed  ));
+	float z_wave_value = z_amplitude * sin( (2.0 * PI * z_frequency) * ( z_coord + TIME * z_speed  ));
+	float diagonal_wave_value = diagonal_amplitude * sin( (2.0 * PI * diagonal_frequency) * ( x_coord + z_coord +  TIME * diagonal_speed ));
+	return x_wave_value + z_wave_value + diagonal_wave_value;
+}
 
 void vertex() {
-	vec2 x_z_coords = VERTEX.xz;
-	VERTEX.y = get_height(VERTEX.xz);
-	vec2 neighbor_1 = vec2(VERTEX.x + 0.1, VERTEX.z);
-	vec2 neighbor_2 = vec2(VERTEX.x, VERTEX.z + 0.1);
-	float neighbor_1_y = get_height(neighbor_1);
-	float neighbor_2_y = get_height(neighbor_2);
-	vec3 neighbor_1_vec3 = vec3(neighbor_1.x, neighbor_1_y, neighbor_1.y) - VERTEX;
-	vec3 neighbor_2_vec3 = vec3(neighbor_2.x, neighbor_2_y, neighbor_2.y) - VERTEX;
-	my_normal = cross(neighbor_1_vec3, neighbor_2_vec3);
-	NORMAL = my_normal;
+	float x_jitter = random_x(VERTEX.xz) - 0.5;
+	float z_jitter = random_z(VERTEX.xz) - 0.5;
+	VERTEX.x += x_jitter;
+	VERTEX.z += z_jitter;
+	VERTEX.y = get_height_offset(VERTEX.x, VERTEX.z);
 }
 
 void fragment() {
 	ALBEDO = vec3(0.01, 0.05, 0.08);
 	ROUGHNESS = 0.01;
 	METALLIC = 0.0;
-	NORMAL = my_normal;
+	NORMAL = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
 }

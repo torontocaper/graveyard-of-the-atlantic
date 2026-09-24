@@ -9,6 +9,10 @@ extends MeshInstance3D
 @export var z_wave_frequency : float = 2.0 ## Number of waves per second?
 @export var z_wave_speed : float = 0.1 ## Velocity of wave in metres/second
 
+@export var diagonal_wave_amplitude : float = 2.0 ## Peak deviation from zero aka maximum height in metres
+@export var diagonal_wave_frequency : float = 2.0 ## Number of waves per second?
+@export var diagonal_wave_speed : float = 0.1 ## Velocity of wave in metres/second
+
 var water_shader : ShaderMaterial
 
 func _ready() -> void:
@@ -19,6 +23,9 @@ func _ready() -> void:
 	water_shader.set_shader_parameter("z_amplitude", z_wave_amplitude)
 	water_shader.set_shader_parameter("z_frequency", z_wave_frequency)
 	water_shader.set_shader_parameter("z_speed", z_wave_speed)
+	water_shader.set_shader_parameter("diagonal_amplitude", diagonal_wave_amplitude)
+	water_shader.set_shader_parameter("diagonal_frequency", diagonal_wave_frequency)
+	water_shader.set_shader_parameter("diagonal_speed", diagonal_wave_speed)
 
 func get_wave_height_at_position_1d(position_x : float) -> float:
 	var height : float

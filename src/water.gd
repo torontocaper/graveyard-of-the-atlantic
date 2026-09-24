@@ -1,17 +1,17 @@
 class_name Water
 extends MeshInstance3D
 
-@export var x_wave_amplitude : float = 2.0 ## Peak deviation from zero aka maximum height in metres
-@export var x_wave_frequency : float = 2.0 ## Number of waves per second?
+@export var x_wave_amplitude : float = 0.05 ## Peak deviation from zero aka maximum height in metres
+@export var x_wave_frequency : float = 1.5 ## Number of waves per second?
 @export var x_wave_speed : float = 0.1 ## Velocity of wave in metres/second
 
-@export var z_wave_amplitude : float = 2.0 ## Peak deviation from zero aka maximum height in metres
-@export var z_wave_frequency : float = 2.0 ## Number of waves per second?
-@export var z_wave_speed : float = 0.1 ## Velocity of wave in metres/second
+@export var z_wave_amplitude : float = 0.1 ## Peak deviation from zero aka maximum height in metres
+@export var z_wave_frequency : float = 0.6 ## Number of waves per second?
+@export var z_wave_speed : float = 0.35 ## Velocity of wave in metres/second
 
-@export var diagonal_wave_amplitude : float = 2.0 ## Peak deviation from zero aka maximum height in metres
-@export var diagonal_wave_frequency : float = 2.0 ## Number of waves per second?
-@export var diagonal_wave_speed : float = 0.1 ## Velocity of wave in metres/second
+@export var diagonal_wave_amplitude : float = 0.15 ## Peak deviation from zero aka maximum height in metres
+@export var diagonal_wave_frequency : float = 0.1 ## Number of waves per second?
+@export var diagonal_wave_speed : float = 0.3 ## Velocity of wave in metres/second
 
 var water_shader : ShaderMaterial
 

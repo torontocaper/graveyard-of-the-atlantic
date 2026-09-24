@@ -3,45 +3,58 @@
 [ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://src/water.gdshader" id="1_eewff"]
 [ext_resource type="Script" uid="uid://dqo7xc8xq0s5l" path="res://src/water.gd" id="2_gh0ne"]
 
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gh0ne"]
+sky_top_color = Color(0, 0.304, 0.57, 1)
+sky_horizon_color = Color(0.964505, 1.0095284, 1.060405, 1)
+ground_bottom_color = Color(0.09985284, 0.24780053, 0.3133042, 1)
+ground_horizon_color = Color(0.964505, 1.0095284, 1.060405, 1)
+
+[sub_resource type="Sky" id="Sky_5q4o7"]
+sky_material = SubResource("ProceduralSkyMaterial_gh0ne")
+
+[sub_resource type="Environment" id="Environment_3cfgd"]
+background_mode = 2
+sky = SubResource("Sky_5q4o7")
+fog_enabled = true
+volumetric_fog_density = 0.0157
+
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts572"]
 render_priority = 0
 shader = ExtResource("1_eewff")
-shader_parameter/x_amplitude = 0.045
-shader_parameter/x_frequency = 1.445
-shader_parameter/x_speed = 0.125
-shader_parameter/z_amplitude = 0.095
-shader_parameter/z_frequency = 0.63
-shader_parameter/z_speed = 0.355
-shader_parameter/diagonal_amplitude = 0.155
-shader_parameter/diagonal_frequency = 0.097
-shader_parameter/diagonal_speed = 0.335
+shader_parameter/x_amplitude = 0.465
+shader_parameter/x_frequency = 0.055
+shader_parameter/x_speed = 1.35
+shader_parameter/z_amplitude = 0.105
+shader_parameter/z_frequency = 0.045
+shader_parameter/z_speed = 0.045
+shader_parameter/diagonal_amplitude = 0.455
+shader_parameter/diagonal_frequency = 0.027
+shader_parameter/diagonal_speed = 2.485
 
 [sub_resource type="PlaneMesh" id="PlaneMesh_dsc2w"]
 material = SubResource("ShaderMaterial_ts572")
-size = Vector2(2000, 2000)
-subdivide_width = 1000
-subdivide_depth = 1000
+size = Vector2(200, 200)
+subdivide_width = 100
+subdivide_depth = 100
 
 [node name="Main" type="Node3D" unique_id=1999602932]
 
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1623070726]
+environment = SubResource("Environment_3cfgd")
+
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1376281314]
-transform = Transform3D(1, 0, 0, 0, 0.93907595, -0.34370977, 0, 0.34370977, 0.93907595, 0, 0, 0)
-visible = false
+transform = Transform3D(0.54369974, 0.025564939, 0.8388907, -0.34075776, 0.92016804, 0.1928092, -0.76699096, -0.39068872, 0.5090064, 0, 0, 0)
 shadow_enabled = true
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1873180764]
 mesh = SubResource("PlaneMesh_dsc2w")
 script = ExtResource("2_gh0ne")
-x_wave_amplitude = 1.0
-x_wave_frequency = 0.5
-z_wave_amplitude = 0.8
-z_wave_frequency = 0.2
-z_wave_speed = 0.05
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1713386902]
-transform = Transform3D(1, 0, 0, 0, 0.64278764, 0.7660445, 0, -0.7660445, 0.64278764, 0, 8, 12)
+transform = Transform3D(1, 0, 0, 0, 0.9659258, 0.25881904, 0, -0.25881904, 0.9659258, 0, 2, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="." unique_id=12476565]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7435923, 0.7189279, -2.7512417)
+visible = false
 light_energy = 20.0
 omni_range = 100.0

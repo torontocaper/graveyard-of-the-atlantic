@@ -2,12 +2,32 @@
 
 [ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://src/water.gdshader" id="1_eewff"]
 [ext_resource type="Script" uid="uid://dqo7xc8xq0s5l" path="res://src/water.gd" id="2_gh0ne"]
+[ext_resource type="PackedScene" uid="uid://wa0310kj7mpc" path="res://src/lighthouse.tscn" id="3_5q4o7"]
+
+[sub_resource type="Gradient" id="Gradient_fyndt"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.996)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_3cfgd"]
+noise_type = 2
+frequency = 1.0
+fractal_type = 0
+cellular_return_type = 0
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_5q4o7"]
+width = 4096
+height = 2048
+noise = SubResource("FastNoiseLite_3cfgd")
+color_ramp = SubResource("Gradient_fyndt")
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_gh0ne"]
-sky_top_color = Color(0, 0.304, 0.57, 1)
-sky_horizon_color = Color(0.964505, 1.0095284, 1.060405, 1)
-ground_bottom_color = Color(0.09985284, 0.24780053, 0.3133042, 1)
-ground_horizon_color = Color(0.964505, 1.0095284, 1.060405, 1)
+sky_top_color = Color(0, 0, 0, 1)
+sky_horizon_color = Color(0, 0.032999996, 0.11, 1)
+sky_cover = SubResource("NoiseTexture2D_5q4o7")
+sky_cover_modulate = Color(0.15127608, 0.15127608, 0.15127605, 1)
+ground_bottom_color = Color(0.00868785, 0.04496094, 0.06713953, 1)
+ground_horizon_color = Color(0, 0, 0.22745098, 1)
+sun_angle_max = 0.0
 
 [sub_resource type="Sky" id="Sky_5q4o7"]
 sky_material = SubResource("ProceduralSkyMaterial_gh0ne")
@@ -15,8 +35,8 @@ sky_material = SubResource("ProceduralSkyMaterial_gh0ne")
 [sub_resource type="Environment" id="Environment_3cfgd"]
 background_mode = 2
 sky = SubResource("Sky_5q4o7")
-fog_enabled = true
-volumetric_fog_density = 0.0157
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts572"]
 render_priority = 0
@@ -37,6 +57,9 @@ size = Vector2(200, 200)
 subdivide_width = 100
 subdivide_depth = 100
 
+[sub_resource type="FogMaterial" id="FogMaterial_5q4o7"]
+density = 0.0415
+
 [node name="Main" type="Node3D" unique_id=1999602932]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1623070726]
@@ -44,6 +67,7 @@ environment = SubResource("Environment_3cfgd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1376281314]
 transform = Transform3D(0.54369974, 0.025564939, 0.8388907, -0.34075776, 0.92016804, 0.1928092, -0.76699096, -0.39068872, 0.5090064, 0, 0, 0)
+light_energy = 0.1
 shadow_enabled = true
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1873180764]
@@ -58,3 +82,34 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 6.7435923, 0.7189279, -2.7512
 visible = false
 light_energy = 20.0
 omni_range = 100.0
+
+[node name="Lighthouse" parent="." unique_id=1895455229 instance=ExtResource("3_5q4o7")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.374928, -9.536743e-07, -43.437485)
+
+[node name="LightPivot" parent="Lighthouse" index="1" unique_id=618134865]
+transform = Transform3D(-0.78260946, 0, 0.61333627, 0, 1, 0, -0.61333627, 0, -0.78260946, 0, 0, 0)
+
+[node name="Spotlight" parent="Lighthouse/LightPivot" index="0" unique_id=1974446724]
+light_color = Color(1, 0.8413333, 0.44, 1)
+light_volumetric_fog_energy = 0.15
+spot_range = 200.0
+spot_angle = 30.0
+
+[node name="Spotlight3" parent="Lighthouse/LightPivot" index="1" unique_id=1112810314]
+visible = false
+
+[node name="Spotlight4" parent="Lighthouse/LightPivot" index="2" unique_id=769192926]
+visible = false
+
+[node name="Spotlight2" parent="Lighthouse/LightPivot" index="3" unique_id=122698681]
+light_color = Color(1, 0.8413333, 0.44, 1)
+light_volumetric_fog_energy = 0.15
+spot_range = 200.0
+spot_angle = 30.0
+
+[node name="FogVolume" type="FogVolume" parent="." unique_id=818301949]
+size = Vector3(200, 20, 200)
+material = SubResource("FogMaterial_5q4o7")
+
+[editable path="Lighthouse"]
+[editable path="Lighthouse/CollisionShape3D2/lighthouse-mesh"]

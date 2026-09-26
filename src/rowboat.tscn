@@ -14,3 +14,12 @@ shape = ExtResource("2_k3878")
 [node name="RowboatMesh" type="MeshInstance3D" parent="." unique_id=2100106468]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("3_cf8e6")
+
+[node name="MarkerBow" type="Marker3D" parent="." unique_id=1123306964]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[node name="MarkerStarboardAft" type="Marker3D" parent="." unique_id=1259230574]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 0, 0.9)
+
+[node name="MarkerPortAft" type="Marker3D" parent="." unique_id=1887727831]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 0, 0.9)

@@ -1,0 +1,22 @@
+[gd_resource type="PlaneMesh" format=3 uid="uid://bwxxfqd1vhn5a"]
+
+[ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://src/water.gdshader" id="1_e84e4"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0mubu"]
+render_priority = 0
+shader = ExtResource("1_e84e4")
+shader_parameter/x_amplitude = 0.0
+shader_parameter/x_frequency = 0.0
+shader_parameter/x_speed = 0.0
+shader_parameter/z_amplitude = 0.0
+shader_parameter/z_frequency = 0.0
+shader_parameter/z_speed = 0.0
+shader_parameter/diagonal_amplitude = 0.0
+shader_parameter/diagonal_frequency = 0.0
+shader_parameter/diagonal_speed = 0.0
+
+[resource]
+material = SubResource("ShaderMaterial_0mubu")
+size = Vector2(10, 10)
+subdivide_width = 10
+subdivide_depth = 10

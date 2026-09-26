@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://ddle7vj52a7s6"]
+
+[ext_resource type="Script" uid="uid://c1nmvm7kk8ho4" path="res://src/rowboat.gd" id="2_f5osq"]
+[ext_resource type="Shape3D" uid="uid://bfrswf1q3vvbm" path="res://resources/collider_rowboat_small.tres" id="2_k3878"]
+[ext_resource type="ArrayMesh" uid="uid://ce620fyjn62ff" path="res://resources/mesh_rowboat_small.tres" id="3_cf8e6"]
+
+[node name="Rowboat3D" type="RigidBody3D" unique_id=2022103872]
+script = ExtResource("2_f5osq")
+
+[node name="RowboatCollider" type="CollisionShape3D" parent="." unique_id=1355817582]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+shape = ExtResource("2_k3878")
+
+[node name="RowboatMesh" type="MeshInstance3D" parent="." unique_id=2100106468]
+transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
+mesh = ExtResource("3_cf8e6")

@@ -1,0 +1,50 @@
+[gd_scene format=3 uid="uid://bkfeoxxjwv5np"]
+
+[ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="1_pt5w0"]
+[ext_resource type="Texture2D" uid="uid://cr6bq1pdhcf7g" path="res://icon.svg" id="2_0mubu"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mubu"]
+sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+ground_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)
+
+[sub_resource type="Sky" id="Sky_kq6bg"]
+sky_material = SubResource("ProceduralSkyMaterial_0mubu")
+
+[sub_resource type="Environment" id="Environment_6e3tk"]
+background_mode = 2
+sky = SubResource("Sky_kq6bg")
+
+[sub_resource type="WorldBoundaryShape3D" id="WorldBoundaryShape3D_dsc2w"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7a2v"]
+albedo_texture = ExtResource("2_0mubu")
+uv1_scale = Vector3(20, 20, 20)
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dsc2w"]
+material = SubResource("StandardMaterial3D_e7a2v")
+size = Vector2(20, 20)
+subdivide_width = 10
+subdivide_depth = 10
+
+[node name="RowboatTest" type="Node3D" unique_id=51230158]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1214632084]
+environment = SubResource("Environment_6e3tk")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1073012873]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="StaticBody3D" type="StaticBody3D" parent="." unique_id=2103141126]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D" unique_id=687413774]
+shape = SubResource("WorldBoundaryShape3D_dsc2w")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="StaticBody3D" unique_id=1686599054]
+mesh = SubResource("PlaneMesh_dsc2w")
+
+[node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("1_pt5w0")]
+row_power = 5.0
+
+[node name="Camera3D" type="Camera3D" parent="Rowboat3D" unique_id=186980027]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.8660253, 0, 4, 4)

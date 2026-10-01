@@ -1,0 +1,5 @@
+[gd_scene format=3 uid="uid://cihuu2autljpg"]
+
+[node name="Oar" type="Polygon2D" unique_id=774565184]
+color = Color(0.8086504, 0.59868366, 0.38385448, 1)
+polygon = PackedVector2Array(0, -1, 10, -1, 11, -2, 12, -2, 13, -1, 13, -1, 13, 1, 12, 2, 11, 2, 10, 1, 0, 1)

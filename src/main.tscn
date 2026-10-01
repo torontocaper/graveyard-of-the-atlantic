@@ -35,7 +35,6 @@ sky_material = SubResource("ProceduralSkyMaterial_gh0ne")
 [sub_resource type="Environment" id="Environment_3cfgd"]
 background_mode = 2
 sky = SubResource("Sky_5q4o7")
-volumetric_fog_enabled = true
 volumetric_fog_density = 0.001
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_ts572"]
@@ -67,7 +66,6 @@ environment = SubResource("Environment_3cfgd")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1376281314]
 transform = Transform3D(0.54369974, 0.025564939, 0.8388907, -0.34075776, 0.92016804, 0.1928092, -0.76699096, -0.39068872, 0.5090064, 0, 0, 0)
-light_energy = 0.1
 shadow_enabled = true
 
 [node name="Water" type="MeshInstance3D" parent="." unique_id=1873180764]
@@ -87,7 +85,7 @@ omni_range = 100.0
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -31.374928, -9.536743e-07, -43.437485)
 
 [node name="LightPivot" parent="Lighthouse" index="1" unique_id=618134865]
-transform = Transform3D(-0.78260946, 0, 0.61333627, 0, 1, 0, -0.61333627, 0, -0.78260946, 0, 0, 0)
+transform = Transform3D(0.9907416, 0, 0.07933674, 0, 1, 0, -0.07933674, 0, 0.9907416, 0, 0, 0)
 
 [node name="Spotlight" parent="Lighthouse/LightPivot" index="0" unique_id=1974446724]
 light_color = Color(1, 0.8413333, 0.44, 1)

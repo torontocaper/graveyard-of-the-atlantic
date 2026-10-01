@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://bk35cdvcaaff6"]
+
+[ext_resource type="Texture2D" uid="uid://ywyb2hfa6mm3" path="res://assets/sprites/dinghyLarge1.png" id="1_btiuf"]
+[ext_resource type="Script" uid="uid://b6okrj8w7uay5" path="res://src/rowboat_2d.gd" id="1_uhro4"]
+[ext_resource type="PackedScene" uid="uid://cihuu2autljpg" path="res://src/oar.tscn" id="2_k5vbf"]
+
+[node name="Rowboat2D" type="RigidBody2D" unique_id=1146708961]
+script = ExtResource("1_uhro4")
+
+[node name="BoatSprite" type="Sprite2D" parent="." unique_id=1023992268]
+texture = ExtResource("1_btiuf")
+
+[node name="BoatCollider" type="CollisionPolygon2D" parent="." unique_id=2030574176]
+polygon = PackedVector2Array(0, 17, 7, 5, 7, -17, -7, -17, -7, 6)
+
+[node name="OarPivotPort" type="Node2D" parent="." unique_id=1331245084]
+position = Vector2(9, 0)
+
+[node name="OarPort" parent="OarPivotPort" unique_id=774565184 instance=ExtResource("2_k5vbf")]
+
+[node name="OarPivotStarboard" type="Node2D" parent="." unique_id=2037101556]
+position = Vector2(-9, 0)
+rotation = 3.1415927
+
+[node name="OarStarboard" parent="OarPivotStarboard" unique_id=851164088 instance=ExtResource("2_k5vbf")]

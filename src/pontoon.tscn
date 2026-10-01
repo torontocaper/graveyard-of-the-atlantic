@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://cy6apcmk45c2d"]
+
+[ext_resource type="Script" uid="uid://c8hj24plyacey" path="res://src/pontoon.gd" id="1_swwqf"]
+
+[node name="Pontoon" type="Node3D" unique_id=795425991]
+script = ExtResource("1_swwqf")

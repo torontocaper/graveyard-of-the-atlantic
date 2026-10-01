@@ -46,9 +46,9 @@ var water_body : StaticBody3D
 var water_shape : ConcavePolygonShape3D
 
 func _ready() -> void:
-	create_trimesh_collision()
+	#create_trimesh_collision()
 	water_body = get_child(0) as StaticBody3D
-	water_shape = water_body.get_child(0).shape
+	#water_shape = water_body.get_child(0).shape
 	water_shader = get_active_material(0)
 	set_shader_parameters()
 

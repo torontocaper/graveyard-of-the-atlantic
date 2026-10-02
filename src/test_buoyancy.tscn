@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
 [ext_resource type="Shader" uid="uid://d002w1wx3mkli" path="res://src/test_buoyancy.gdshader" id="2_jmhuu"]
 [ext_resource type="Script" uid="uid://c27qghfsvjqsn" path="res://src/water_area.gd" id="2_sgkto"]
+[ext_resource type="Script" uid="uid://dkyvj08v7rq5x" path="res://src/water_plane.gd" id="3_sgkto"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
@@ -19,23 +20,17 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
-fog_enabled = true
 fog_mode = 1
 fog_light_color = Color(0.5176471, 0.5529412, 0.60784316, 1)
 fog_light_energy = 0.7
 fog_sun_scatter = 0.01
 fog_sky_affect = 0.98
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_e7a2v"]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
 render_priority = 0
 shader = ExtResource("2_jmhuu")
-shader_parameter/base_color = Color(0.09803922, 0.09803922, 0.4392157, 1)
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_dsc2w"]
-material = SubResource("ShaderMaterial_e7a2v")
-size = Vector2(200, 200)
-subdivide_width = 100
-subdivide_depth = 100
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_sgkto"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_dsc2w"]
 size = Vector3(200, 10, 200)
@@ -51,16 +46,24 @@ light_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
 light_energy = 16.0
 light_angular_distance = 4.32
 shadow_enabled = true
+shadow_blur = 0.0
 
 [node name="Camera3D" type="Camera3D" parent="." unique_id=1359731987]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 2, 5)
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 3, 4)
+near = 2.0
+far = 200.0
 
 [node name="WaterArea" type="Area3D" parent="." unique_id=1105295794]
 script = ExtResource("2_sgkto")
 
 [node name="WaterPlane" type="MeshInstance3D" parent="WaterArea" unique_id=1034853787]
-mesh = SubResource("PlaneMesh_dsc2w")
+material_override = SubResource("ShaderMaterial_f4q1m")
+mesh = SubResource("PlaceholderMesh_sgkto")
 skeleton = NodePath("../..")
+script = ExtResource("3_sgkto")
+displacement_range = 0.2
+water_size = Vector2(8, 8)
+water_resolution = Vector2i(4, 4)
 
 [node name="WaterShape" type="CollisionShape3D" parent="WaterArea" unique_id=928497088]
 shape = SubResource("BoxShape3D_dsc2w")

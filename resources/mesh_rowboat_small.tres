@@ -1,9 +1,45 @@
 [gd_resource type="ArrayMesh" format=4 uid="uid://ce620fyjn62ff"]
 
+[sub_resource type="Gradient" id="Gradient_t3ynn"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0.06744868, 0.36070383, 0.72727275)
+colors = PackedColorArray(0.8235294, 0.7058824, 0.54901963, 1, 0.9607843, 0.87058824, 0.7019608, 1, 0.54509807, 0.27058825, 0.07450981, 1)
+
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_vo64b"]
+noise_type = 2
+fractal_octaves = 2
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fo86o"]
+noise = SubResource("FastNoiseLite_vo64b")
+color_ramp = SubResource("Gradient_t3ynn")
+seamless = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ne0fg"]
+render_priority = 1
+transparency = 1
+shading_mode = 0
+albedo_color = Color(0, 0, 0, 1)
+grow = true
+grow_amount = 0.01
+stencil_mode = 3
+stencil_flags = 1
+stencil_compare = 5
+metadata/_stencil_owned = true
+
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_synxh"]
 resource_name = "colormap"
+next_pass = SubResource("StandardMaterial3D_ne0fg")
 cull_mode = 2
-texture_filter = 2
+diffuse_mode = 3
+specular_mode = 1
+albedo_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
+albedo_texture = SubResource("NoiseTexture2D_fo86o")
+albedo_texture_force_srgb = true
+roughness = 0.0
+uv1_triplanar = true
+uv1_triplanar_sharpness = 76.10936
+stencil_mode = 1
+stencil_flags = 2
 metadata/_gltf_primary_texture_coord = 0
 
 [sub_resource type="ArrayMesh" id="ArrayMesh_8e8ub"]

@@ -1,13 +1,17 @@
 shader_type spatial;
+//render_mode skip_vertex_transform;
+//render_mode diffuse_toon, specular_toon;
 
-uniform vec4 base_color : source_color;
+//varying flat vec3 flat_vertex;
 
 void vertex() {
-	
+	//flat_vertex = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 
 void fragment() {
-	ALBEDO = base_color.rgb;
+	//LIGHT_VERTEX = flat_vertex;
+	//VERTEX = flat_vertex;
+	ALBEDO = COLOR.rgb;
 }
 
 //void light() {

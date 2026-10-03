@@ -36,7 +36,7 @@ var water_height : float = 0.0
 # Called every frame. 'delta' is the elapsed time since the previous frame.
 func _physics_process(_delta: float) -> void:
 	if water_area:
-		water_height = water_area.get_water_height_at_position(position.x, position.z)
+		water_height = water_area.get_water_height_at_position(global_position.x, global_position.z)
 		depth = water_height - global_position.y
 		if depth >= 0:
 			is_submerged = true

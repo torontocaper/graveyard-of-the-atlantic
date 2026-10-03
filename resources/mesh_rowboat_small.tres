@@ -2,12 +2,14 @@
 
 [sub_resource type="Gradient" id="Gradient_t3ynn"]
 interpolation_mode = 1
-offsets = PackedFloat32Array(0.06744868, 0.36070383, 0.72727275)
+offsets = PackedFloat32Array(0.06744868, 0.516129, 0.98533726)
 colors = PackedColorArray(0.8235294, 0.7058824, 0.54901963, 1, 0.9607843, 0.87058824, 0.7019608, 1, 0.54509807, 0.27058825, 0.07450981, 1)
 
 [sub_resource type="FastNoiseLite" id="FastNoiseLite_vo64b"]
 noise_type = 2
 fractal_octaves = 2
+cellular_return_type = 0
+domain_warp_enabled = true
 
 [sub_resource type="NoiseTexture2D" id="NoiseTexture2D_fo86o"]
 noise = SubResource("FastNoiseLite_vo64b")
@@ -32,7 +34,6 @@ next_pass = SubResource("StandardMaterial3D_ne0fg")
 cull_mode = 2
 diffuse_mode = 3
 specular_mode = 1
-albedo_color = Color(0.74509805, 0.74509805, 0.74509805, 1)
 albedo_texture = SubResource("NoiseTexture2D_fo86o")
 albedo_texture_force_srgb = true
 roughness = 0.0

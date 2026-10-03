@@ -4,7 +4,15 @@ shader_type spatial;
 
 //varying flat vec3 flat_vertex;
 
+float get_height_offset(float x_coord, float z_coord) {
+	float x_wave_value = 0.1 * sin(x_coord + TIME);
+	float z_wave_value = 0.15 * sin(z_coord + TIME);
+	float diagonal_wave_value = 0.2 * sin(x_coord + z_coord + TIME);
+	return x_wave_value + z_wave_value + diagonal_wave_value;
+}
+
 void vertex() {
+	VERTEX.y = get_height_offset(VERTEX.x, VERTEX.z);
 	//flat_vertex = (MODELVIEW_MATRIX * vec4(VERTEX, 1.0)).xyz;
 }
 

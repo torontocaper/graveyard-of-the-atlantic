@@ -1,9 +1,7 @@
 [gd_scene format=3 uid="uid://bxqg8yc8f2pjq"]
 
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
-[ext_resource type="Shader" uid="uid://d002w1wx3mkli" path="res://src/test_buoyancy.gdshader" id="2_jmhuu"]
-[ext_resource type="Script" uid="uid://c27qghfsvjqsn" path="res://src/water_area.gd" id="2_sgkto"]
-[ext_resource type="Script" uid="uid://dkyvj08v7rq5x" path="res://src/water_plane.gd" id="3_sgkto"]
+[ext_resource type="PackedScene" uid="uid://nsly1pc68web" path="res://src/water_area.tscn" id="2_2ht3r"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
@@ -20,20 +18,7 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
-fog_mode = 1
-fog_light_color = Color(0.5176471, 0.5529412, 0.60784316, 1)
-fog_light_energy = 0.7
-fog_sun_scatter = 0.01
-fog_sky_affect = 0.98
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
-render_priority = 0
-shader = ExtResource("2_jmhuu")
-
-[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_sgkto"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_dsc2w"]
-size = Vector3(200, 10, 200)
+fog_enabled = true
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -41,33 +26,20 @@ size = Vector3(200, 10, 200)
 environment = SubResource("Environment_sgkto")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=206087874]
-transform = Transform3D(-0.8660254, -0.43301278, 0.24999999, -0.31517357, 0.860917, 0.39935893, -0.38815674, 0.2670616, -0.88205016, 0, 0, 0)
+transform = Transform3D(-0.5443185, -0.5082121, 0.6674113, -0.31515658, 0.86120594, 0.39874908, -0.7774277, 0.006707415, -0.62893665, 0, 0, 0)
 light_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
 light_energy = 16.0
 light_angular_distance = 4.32
 shadow_enabled = true
 shadow_blur = 0.0
 
-[node name="Camera3D" type="Camera3D" parent="." unique_id=1359731987]
-transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 3, 4)
-near = 2.0
-far = 200.0
-
-[node name="WaterArea" type="Area3D" parent="." unique_id=1105295794]
-script = ExtResource("2_sgkto")
-
-[node name="WaterPlane" type="MeshInstance3D" parent="WaterArea" unique_id=1034853787]
-material_override = SubResource("ShaderMaterial_f4q1m")
-mesh = SubResource("PlaceholderMesh_sgkto")
-skeleton = NodePath("../..")
-script = ExtResource("3_sgkto")
-displacement_range = 0.2
-water_size = Vector2(8, 8)
-water_resolution = Vector2i(4, 4)
-
-[node name="WaterShape" type="CollisionShape3D" parent="WaterArea" unique_id=928497088]
-shape = SubResource("BoxShape3D_dsc2w")
+[node name="WaterArea" parent="." unique_id=905625047 instance=ExtResource("2_2ht3r")]
 
 [node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("5_f4q1m")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11257434, 0)
 mass = 10.0
+
+[node name="Camera3D" type="Camera3D" parent="Rowboat3D" unique_id=1359731987]
+transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8874257, 4)
+near = 1.48
+far = 200.0

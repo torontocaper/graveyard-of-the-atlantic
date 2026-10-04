@@ -1,54 +1,43 @@
-class_name WaterPlane
+class_name Landmass
 extends MeshInstance3D
-## Procedurally generated water mesh
 
-#region Constants
-#const TOON_WATER = preload("uid://cg56rup1h1eot")
-#endregion
+#@export var height_map : Texture2D
 
-#region Exports
-var water_properties : Dictionary:
-	set(value):
-		water_properties = value
-		mesh = create_water_plane(
-			water_properties["water_size"], 
-			water_properties["water_resolution"], 
-			water_properties["water_jitter"], 
-			)
-		var water_shader = material_override as ShaderMaterial
-		water_shader.set_shader_parameter("water_color", water_properties["water_base_color"])
-#endregion
+@export_group("Landmass Properties", "landmass_")
+@export var landmass_size : Vector2 = Vector2(200.0, 200.0)
+@export var landmass_resolution : Vector2i = Vector2i(400, 400)
+@export var landmass_max_height : float = 100.0
+@export var landmass_noise : Noise
 
-#region Methods
 func _ready() -> void:
-	pass
-	
-## Create the water plane
-func create_water_plane(size : Vector2, resolution : Vector2i, jitter : float) -> ArrayMesh:
+	mesh = create_landmass(landmass_size, landmass_resolution, landmass_max_height, landmass_noise)
+	var landmass_shader = material_override as ShaderMaterial
+	landmass_shader.set_shader_parameter("max_height", landmass_max_height)
+
+func create_landmass(size : Vector2, resolution : Vector2i, max_height : float, noise : Noise) -> Mesh:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
 	new_plane_mesh.size = size
 	new_plane_mesh.subdivide_width = resolution.x
 	new_plane_mesh.subdivide_depth = resolution.y
-	
+
 	# Get the data that describes the [PlaneMesh] and assign it to a new [ArrayMesh]
 	var plane_mesh_arrays := new_plane_mesh.get_mesh_arrays()
 	var array_mesh := ArrayMesh.new()
 	array_mesh.add_surface_from_arrays(Mesh.PRIMITIVE_TRIANGLES, plane_mesh_arrays)
-	
+
 	# Initialize the MDT with the data from the new ArrayMesh
 	var mdt : MeshDataTool = MeshDataTool.new()
 	mdt.create_from_surface(array_mesh, 0)
-	
+
 	# Initialize the SurfaceTool (necessary for setting "smooth groups" for flat-shading)
 	var st : SurfaceTool = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
-	# Apply jitter to vertices
+	# Apply height displacement to vertices
 	for v in mdt.get_vertex_count():
 		var vertex = mdt.get_vertex(v)
-		vertex.x += randf_range(-jitter, jitter)
-		vertex.z += randf_range(-jitter, jitter)
+		vertex.y += max_height * noise.get_noise_2d(vertex.x, vertex.z)
 		mdt.set_vertex(v, vertex)
 
 	# Create the smoothing groups
@@ -71,5 +60,3 @@ func create_water_plane(size : Vector2, resolution : Vector2i, jitter : float) -
 	st.commit(array_mesh)
 
 	return array_mesh
-
-#endregion

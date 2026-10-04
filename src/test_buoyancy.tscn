@@ -2,9 +2,9 @@
 
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
 [ext_resource type="PackedScene" uid="uid://nsly1pc68web" path="res://src/water_area.tscn" id="2_2ht3r"]
-[ext_resource type="Texture2D" uid="uid://bv67brwq2o4u6" path="res://resources/underwaterplane.tres" id="4_sgkto"]
-[ext_resource type="FastNoiseLite" uid="uid://dwqqt6640004v" path="res://resources/underwater_noise.tres" id="5_3an2c"]
+[ext_resource type="Shader" uid="uid://i70cnbjo6gn" path="res://src/landmass.gdshader" id="4_f4q1m"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
+[ext_resource type="Script" uid="uid://bkh07fuc3ecdr" path="res://src/landmass.gd" id="6_3an2c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -20,32 +20,15 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
-fog_enabled = true
-volumetric_fog_enabled = true
 
-[sub_resource type="Gradient" id="Gradient_3an2c"]
-offsets = PackedFloat32Array(0.2776204, 0.8753541)
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
+render_priority = 0
+shader = ExtResource("4_f4q1m")
+shader_parameter/max_height = 0.0
 
-[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f4q1m"]
-noise = ExtResource("5_3an2c")
-color_ramp = SubResource("Gradient_3an2c")
-seamless = true
-invert = true
-as_normal_map = true
-bump_strength = 32.0
+[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_sgkto"]
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ht3r"]
-albedo_texture = ExtResource("4_sgkto")
-normal_enabled = true
-normal_texture = SubResource("NoiseTexture2D_f4q1m")
-heightmap_enabled = true
-heightmap_texture = ExtResource("4_sgkto")
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_2ht3r"]
-material = SubResource("StandardMaterial3D_2ht3r")
-size = Vector2(200, 200)
-subdivide_width = 100
-subdivide_depth = 100
+[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4q1m"]
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -53,7 +36,7 @@ subdivide_depth = 100
 environment = SubResource("Environment_sgkto")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=206087874]
-transform = Transform3D(-0.5443185, -0.5082121, 0.6674113, -0.31515658, 0.86120594, 0.39874908, -0.7774277, 0.006707415, -0.62893665, 0, 0, 0)
+transform = Transform3D(-0.944016, -0.24130079, -0.22496155, -0.31515658, 0.8612058, 0.39874908, 0.097519726, 0.44732362, -0.88903964, 0, 0, 0)
 light_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
 light_energy = 16.0
 light_angular_distance = 4.32
@@ -73,6 +56,11 @@ transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8
 near = 1.48
 far = 200.0
 
-[node name="UnderWaterPlane" type="MeshInstance3D" parent="." unique_id=1443995635]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
-mesh = SubResource("PlaneMesh_2ht3r")
+[node name="Landmass" type="MeshInstance3D" parent="." unique_id=1443995635]
+material_override = SubResource("ShaderMaterial_f4q1m")
+mesh = SubResource("PlaceholderMesh_sgkto")
+script = ExtResource("6_3an2c")
+landmass_size = Vector2(500, 500)
+landmass_resolution = Vector2i(50, 50)
+landmass_max_height = 25.0
+landmass_noise = SubResource("FastNoiseLite_f4q1m")

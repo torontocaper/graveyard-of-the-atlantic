@@ -2,6 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
 [ext_resource type="PackedScene" uid="uid://nsly1pc68web" path="res://src/water_area.tscn" id="2_2ht3r"]
+[ext_resource type="Texture2D" uid="uid://bv67brwq2o4u6" path="res://resources/underwaterplane.tres" id="4_sgkto"]
+[ext_resource type="FastNoiseLite" uid="uid://dwqqt6640004v" path="res://resources/underwater_noise.tres" id="5_3an2c"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
@@ -18,6 +20,32 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
+fog_enabled = true
+volumetric_fog_enabled = true
+
+[sub_resource type="Gradient" id="Gradient_3an2c"]
+offsets = PackedFloat32Array(0.2776204, 0.8753541)
+
+[sub_resource type="NoiseTexture2D" id="NoiseTexture2D_f4q1m"]
+noise = ExtResource("5_3an2c")
+color_ramp = SubResource("Gradient_3an2c")
+seamless = true
+invert = true
+as_normal_map = true
+bump_strength = 32.0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ht3r"]
+albedo_texture = ExtResource("4_sgkto")
+normal_enabled = true
+normal_texture = SubResource("NoiseTexture2D_f4q1m")
+heightmap_enabled = true
+heightmap_texture = ExtResource("4_sgkto")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_2ht3r"]
+material = SubResource("StandardMaterial3D_2ht3r")
+size = Vector2(200, 200)
+subdivide_width = 100
+subdivide_depth = 100
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -33,12 +61,18 @@ shadow_enabled = true
 shadow_blur = 0.0
 
 [node name="WaterArea" parent="." unique_id=905625047 instance=ExtResource("2_2ht3r")]
+water_plane_size = Vector2(160, 160)
+water_plane_resolution = Vector2i(320, 320)
+water_plane_jitter = 0.2
 
 [node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("5_f4q1m")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.11257434, 0)
 mass = 10.0
 
 [node name="Camera3D" type="Camera3D" parent="Rowboat3D" unique_id=1359731987]
 transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8874257, 4)
 near = 1.48
 far = 200.0
+
+[node name="UnderWaterPlane" type="MeshInstance3D" parent="." unique_id=1443995635]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+mesh = SubResource("PlaneMesh_2ht3r")

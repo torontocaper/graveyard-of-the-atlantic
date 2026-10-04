@@ -1,4 +1,5 @@
 shader_type spatial;
+//render_mode specular_toon;
 
 uniform vec4 water_color : source_color; 
 
@@ -15,6 +16,8 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = water_color.rgb;
-	ROUGHNESS = 0.01;
+	ALPHA = 0.9;
+	ROUGHNESS = 0.15;
+	SPECULAR = 1.0;
 	NORMAL = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
 }

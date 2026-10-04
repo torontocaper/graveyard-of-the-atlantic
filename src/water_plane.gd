@@ -24,7 +24,7 @@ func _ready() -> void:
 	pass
 	
 ## Create the water plane
-func create_water_plane(size : Vector2, resolution : Vector2i, _jitter : float) -> ArrayMesh:
+func create_water_plane(size : Vector2, resolution : Vector2i, jitter : float) -> ArrayMesh:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
 	new_plane_mesh.size = size
@@ -44,6 +44,12 @@ func create_water_plane(size : Vector2, resolution : Vector2i, _jitter : float) 
 	var st : SurfaceTool = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
+	# Apply jitter to vertices
+	for v in mdt.get_vertex_count():
+		var vertex = mdt.get_vertex(v)
+		vertex.x += randf_range(-jitter, jitter)
+		vertex.z += randf_range(-jitter, jitter)
+		mdt.set_vertex(v, vertex)
 
 	var i : int = 0
 	for f in mdt.get_face_count():

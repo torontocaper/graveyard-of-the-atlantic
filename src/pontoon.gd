@@ -43,5 +43,5 @@ func _physics_process(_delta: float) -> void:
 		else:
 			is_submerged = false
 		if is_submerged and parent:
-			parent.apply_force(Vector3.UP * depth * water_area.buoyancy_force_multiplier, position)
-			parent.apply_force(-parent.linear_velocity * depth * water_area.drag_force_multiplier, position)
+			parent.apply_force(Vector3.UP * depth * water_area.force_multiplier_buoyancy, position)
+			parent.apply_force(-parent.linear_velocity * depth * water_area.force_multiplier_drag, position)

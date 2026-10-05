@@ -6,7 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://cy6apcmk45c2d" path="res://src/pontoon.tscn" id="4_cf8e6"]
 
 [node name="Rowboat3D" type="RigidBody3D" unique_id=2022103872 node_paths=PackedStringArray("pontoons")]
-collision_mask = 0
+collision_mask = 2
 mass = 50.0
 angular_damp = 5.0
 script = ExtResource("2_f5osq")
@@ -31,3 +31,13 @@ parent = NodePath("..")
 [node name="Pontoon3" parent="." unique_id=1833632775 node_paths=PackedStringArray("parent") instance=ExtResource("4_cf8e6")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6056748, 0.15121433, 0.7)
 parent = NodePath("..")
+
+[node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1596014818]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
+collision_mask = 2
+spring_length = 2.0
+
+[node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=211528407]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
+current = true
+far = 200.0

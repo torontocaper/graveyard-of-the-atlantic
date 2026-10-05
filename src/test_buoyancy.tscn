@@ -2,9 +2,8 @@
 
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
 [ext_resource type="PackedScene" uid="uid://nsly1pc68web" path="res://src/water_area.tscn" id="2_2ht3r"]
-[ext_resource type="Shader" uid="uid://i70cnbjo6gn" path="res://src/landmass.gdshader" id="4_f4q1m"]
+[ext_resource type="PackedScene" uid="uid://cmlk7vshgp5dd" path="res://src/landmass.tscn" id="4_sgkto"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
-[ext_resource type="Script" uid="uid://bkh07fuc3ecdr" path="res://src/landmass.gd" id="6_3an2c"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
 sky_top_color = Color(0, 0, 0, 1)
@@ -12,7 +11,7 @@ sky_horizon_color = Color(0, 0, 0, 1)
 sky_cover = ExtResource("1_357e6")
 ground_bottom_color = Color(0.09803922, 0.09803922, 0.4392157, 1)
 ground_horizon_color = Color(0, 0, 0, 1)
-sun_angle_max = 15.0
+sun_angle_max = 7.26
 
 [sub_resource type="Sky" id="Sky_2ht3r"]
 sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
@@ -20,15 +19,8 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
-render_priority = 0
-shader = ExtResource("4_f4q1m")
-shader_parameter/max_height = 0.0
-
-[sub_resource type="PlaceholderMesh" id="PlaceholderMesh_sgkto"]
-
-[sub_resource type="FastNoiseLite" id="FastNoiseLite_f4q1m"]
+fog_enabled = true
+volumetric_fog_enabled = true
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -39,7 +31,6 @@ environment = SubResource("Environment_sgkto")
 transform = Transform3D(-0.944016, -0.24130079, -0.22496155, -0.31515658, 0.8612058, 0.39874908, 0.097519726, 0.44732362, -0.88903964, 0, 0, 0)
 light_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
 light_energy = 16.0
-light_angular_distance = 4.32
 shadow_enabled = true
 shadow_blur = 0.0
 
@@ -50,17 +41,14 @@ water_plane_jitter = 0.2
 
 [node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("5_f4q1m")]
 mass = 10.0
+row_power = 80.0
 
 [node name="Camera3D" type="Camera3D" parent="Rowboat3D" unique_id=1359731987]
 transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8874257, 4)
+visible = false
 near = 1.48
 far = 200.0
 
-[node name="Landmass" type="MeshInstance3D" parent="." unique_id=1443995635]
-material_override = SubResource("ShaderMaterial_f4q1m")
-mesh = SubResource("PlaceholderMesh_sgkto")
-script = ExtResource("6_3an2c")
-landmass_size = Vector2(500, 500)
-landmass_resolution = Vector2i(50, 50)
-landmass_max_height = 25.0
-landmass_noise = SubResource("FastNoiseLite_f4q1m")
+[node name="Landmass" parent="." unique_id=1197309006 instance=ExtResource("4_sgkto")]
+landmass_size = Vector2(200, 200)
+landmass_max_height = 20.0

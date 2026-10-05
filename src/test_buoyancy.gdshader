@@ -16,7 +16,7 @@ void vertex() {
 
 void fragment() {
 	ALBEDO = water_color.rgb;
-	ALPHA = 0.9;
+	ALPHA = 0.99;
 	ROUGHNESS = 0.15;
 	SPECULAR = 1.0;
 	NORMAL = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));

@@ -7,14 +7,18 @@ extends MeshInstance3D
 @export var landmass_size : Vector2 = Vector2(200.0, 200.0)
 @export var landmass_resolution : Vector2i = Vector2i(400, 400)
 @export var landmass_max_height : float = 100.0
-@export var landmass_noise : Noise
+#@export var landmass_noise : Noise
+
+@onready var landmass_collider: CollisionShape3D = %LandmassCollider
 
 func _ready() -> void:
-	mesh = create_landmass(landmass_size, landmass_resolution, landmass_max_height, landmass_noise)
+	mesh = create_landmass(landmass_size, landmass_resolution, landmass_max_height)
+	var landmass_shape := mesh.create_trimesh_shape()
+	landmass_collider.shape = landmass_shape
 	var landmass_shader = material_override as ShaderMaterial
 	landmass_shader.set_shader_parameter("max_height", landmass_max_height)
 
-func create_landmass(size : Vector2, resolution : Vector2i, max_height : float, noise : Noise) -> Mesh:
+func create_landmass(size : Vector2, resolution : Vector2i, max_height : float) -> Mesh:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
 	new_plane_mesh.size = size
@@ -30,10 +34,15 @@ func create_landmass(size : Vector2, resolution : Vector2i, max_height : float, 
 	var mdt : MeshDataTool = MeshDataTool.new()
 	mdt.create_from_surface(array_mesh, 0)
 
+
 	# Initialize the SurfaceTool (necessary for setting "smooth groups" for flat-shading)
 	var st : SurfaceTool = SurfaceTool.new()
 	st.begin(Mesh.PRIMITIVE_TRIANGLES)
 
+	# Initialize the noise with a random seed
+	var noise : Noise = FastNoiseLite.new()
+	noise.seed = randi()
+	
 	# Apply height displacement to vertices
 	for v in mdt.get_vertex_count():
 		var vertex = mdt.get_vertex(v)

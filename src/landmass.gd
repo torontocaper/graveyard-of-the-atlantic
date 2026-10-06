@@ -1,7 +1,8 @@
+@tool
 class_name Landmass
 extends MeshInstance3D
 
-#@export var height_map : Texture2D
+@export var force_update : bool = false
 
 @export_group("Landmass Properties", "landmass_")
 @export var landmass_size : Vector2 = Vector2(200.0, 200.0)
@@ -12,18 +13,19 @@ extends MeshInstance3D
 @onready var landmass_collider: CollisionShape3D = %LandmassCollider
 
 func _ready() -> void:
-	mesh = create_landmass(landmass_size, landmass_resolution, landmass_max_height)
-	var landmass_shape := mesh.create_trimesh_shape()
-	landmass_collider.shape = landmass_shape
-	var landmass_shader = material_override as ShaderMaterial
-	landmass_shader.set_shader_parameter("max_height", landmass_max_height)
+	create_landmass()
 
-func create_landmass(size : Vector2, resolution : Vector2i, max_height : float) -> Mesh:
+func _process(delta: float) -> void:
+	if force_update:
+		create_landmass()
+		force_update = false
+
+func create_landmass() -> void:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
-	new_plane_mesh.size = size
-	new_plane_mesh.subdivide_width = resolution.x
-	new_plane_mesh.subdivide_depth = resolution.y
+	new_plane_mesh.size = landmass_size
+	new_plane_mesh.subdivide_width = landmass_resolution.x
+	new_plane_mesh.subdivide_depth = landmass_resolution.y
 
 	# Get the data that describes the [PlaneMesh] and assign it to a new [ArrayMesh]
 	var plane_mesh_arrays := new_plane_mesh.get_mesh_arrays()
@@ -46,7 +48,7 @@ func create_landmass(size : Vector2, resolution : Vector2i, max_height : float) 
 	# Apply height displacement to vertices
 	for v in mdt.get_vertex_count():
 		var vertex = mdt.get_vertex(v)
-		vertex.y += max_height * noise.get_noise_2d(vertex.x, vertex.z)
+		vertex.y += landmass_max_height * noise.get_noise_2d(vertex.x, vertex.z)
 		mdt.set_vertex(v, vertex)
 
 	# Create the smoothing groups
@@ -68,4 +70,15 @@ func create_landmass(size : Vector2, resolution : Vector2i, max_height : float) 
 	array_mesh.clear_surfaces()
 	st.commit(array_mesh)
 
-	return array_mesh
+	# Assign that mesh to this mesh
+	mesh = array_mesh
+
+	# Create the collision shape and assign it to the collider's shape property
+	var landmass_shape := mesh.create_trimesh_shape()
+	landmass_collider.shape = landmass_shape
+
+	# Send the height range to the shader
+	var landmass_shader = material_override as ShaderMaterial
+	#var height_range = landmass_max_height * 2.0
+	landmass_shader.set_shader_parameter("max_height", landmass_max_height)
+	#landmass_shader.set_shader_parameter("height_range", height_range)

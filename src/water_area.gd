@@ -1,8 +1,11 @@
+@tool
 class_name WaterArea
 extends Area3D
 ## [Area3D] that defines a body of water, including the space above and below it
 ##
 ## Used for detecting when physics bodies have entered the area
+
+@export_tool_button("Force Update") var force_update : Callable = update_water_properties
 
 @export_group("Water Plane", "water_plane_")
 @export var water_plane_size : Vector2 = Vector2(200, 200) ## Size of the [WaterPlane] in metres
@@ -37,8 +40,16 @@ func on_body_exited(body : Node3D) -> void:
 	if body is Rowboat:
 		for pontoon in body.pontoons:
 			pontoon.water_area = null
-			
+
+func update_water_properties() -> void:
+	water_plane.water_properties = {
+		"water_size" = water_plane_size,
+		"water_resolution" = water_plane_resolution,
+		"water_jitter" = water_plane_jitter,
+		"water_base_color" = water_plane_base_color,
+	}
+
 func get_water_height_at_position(_position_x : float, _position_z : float) -> float:
 	var height = 0
-	
+	# do some stuff
 	return height

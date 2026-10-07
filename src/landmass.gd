@@ -2,25 +2,28 @@
 class_name Landmass
 extends MeshInstance3D
 
-@export var force_update : bool = false
+@export_tool_button("Force Update") var force_update : Callable = update_landmass
+
+#@export var force_update : bool = false
 
 @export_group("Landmass Properties", "landmass_")
-@export var landmass_size : Vector2 = Vector2(200.0, 200.0)
-@export var landmass_resolution : Vector2i = Vector2i(400, 400)
-@export var landmass_max_height : float = 100.0
+@export var landmass_size : Vector2 = Vector2(100.0, 100.0)
+@export var landmass_resolution : Vector2i = Vector2i(200, 200)
+@export var landmass_max_height : float = 15.0
+@export var landmass_jitter : float = 0.1
 #@export var landmass_noise : Noise
 
 @onready var landmass_collider: CollisionShape3D = %LandmassCollider
 
 func _ready() -> void:
-	create_landmass()
+	update_landmass()
 
-func _process(delta: float) -> void:
-	if force_update:
-		create_landmass()
-		force_update = false
+#func _process(delta: float) -> void:
+	#if force_update:
+		#update_landmass()
+		#force_update = false
 
-func create_landmass() -> void:
+func update_landmass() -> void:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
 	new_plane_mesh.size = landmass_size
@@ -48,6 +51,8 @@ func create_landmass() -> void:
 	# Apply height displacement to vertices
 	for v in mdt.get_vertex_count():
 		var vertex = mdt.get_vertex(v)
+		vertex.x += randf_range(-landmass_jitter, landmass_jitter)
+		vertex.z += randf_range(-landmass_jitter, landmass_jitter)
 		vertex.y += landmass_max_height * noise.get_noise_2d(vertex.x, vertex.z)
 		mdt.set_vertex(v, vertex)
 

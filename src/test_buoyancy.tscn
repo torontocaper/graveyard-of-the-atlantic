@@ -2,7 +2,6 @@
 
 [ext_resource type="Texture2D" uid="uid://ci4fr6h3hpbeo" path="res://assets/Space Background.png" id="1_357e6"]
 [ext_resource type="PackedScene" uid="uid://nsly1pc68web" path="res://src/water_area.tscn" id="2_2ht3r"]
-[ext_resource type="PackedScene" uid="uid://cmlk7vshgp5dd" path="res://src/landmass.tscn" id="4_sgkto"]
 [ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="5_f4q1m"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_jmhuu"]
@@ -19,8 +18,6 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
-fog_enabled = true
-volumetric_fog_enabled = true
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -35,9 +32,9 @@ shadow_enabled = true
 shadow_blur = 0.0
 
 [node name="WaterArea" parent="." unique_id=905625047 instance=ExtResource("2_2ht3r")]
-water_plane_size = Vector2(160, 160)
-water_plane_resolution = Vector2i(320, 320)
-water_plane_jitter = 0.2
+water_plane_size = Vector2(50, 50)
+water_plane_jitter = 0.5
+water_plane_base_color = Color(0.105882354, 0.13725491, 0.7058824, 1)
 
 [node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("5_f4q1m")]
 mass = 10.0
@@ -48,7 +45,3 @@ transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8
 visible = false
 near = 1.48
 far = 200.0
-
-[node name="Landmass" parent="." unique_id=1197309006 instance=ExtResource("4_sgkto")]
-landmass_size = Vector2(200, 200)
-landmass_max_height = 20.0

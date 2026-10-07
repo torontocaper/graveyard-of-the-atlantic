@@ -1,3 +1,4 @@
+@tool
 class_name WaterPlane
 extends MeshInstance3D
 ## Procedurally generated water mesh
@@ -6,17 +7,16 @@ extends MeshInstance3D
 #const TOON_WATER = preload("uid://cg56rup1h1eot")
 #endregion
 
-#region Exports
+#region Properties
 var water_properties : Dictionary:
 	set(value):
 		water_properties = value
-		mesh = create_water_plane(
-			water_properties["water_size"], 
-			water_properties["water_resolution"], 
-			water_properties["water_jitter"], 
+		update_water_plane(
+			water_properties["water_size"],
+			water_properties["water_resolution"],
+			water_properties["water_jitter"],
+			water_properties["water_base_color"]
 			)
-		var water_shader = material_override as ShaderMaterial
-		water_shader.set_shader_parameter("water_color", water_properties["water_base_color"])
 #endregion
 
 #region Methods
@@ -24,7 +24,7 @@ func _ready() -> void:
 	pass
 	
 ## Create the water plane
-func create_water_plane(size : Vector2, resolution : Vector2i, jitter : float) -> ArrayMesh:
+func update_water_plane(size : Vector2, resolution : Vector2i, jitter : float, base_color : Color) -> void:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
 	new_plane_mesh.size = size
@@ -69,7 +69,10 @@ func create_water_plane(size : Vector2, resolution : Vector2i, jitter : float) -
 	# Clear out the previous array mesh data and assign the new date from the SurfaceTool
 	array_mesh.clear_surfaces()
 	st.commit(array_mesh)
+	mesh = array_mesh
 
-	return array_mesh
+	# Update the shader
+	var water_shader = material_override as ShaderMaterial
+	water_shader.set_shader_parameter("water_color", base_color)
 
 #endregion

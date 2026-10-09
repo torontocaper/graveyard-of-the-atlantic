@@ -2,5 +2,5 @@
 
 [ext_resource type="Script" uid="uid://c8hj24plyacey" path="res://src/pontoon.gd" id="1_swwqf"]
 
-[node name="Pontoon" type="Node3D" unique_id=795425991]
+[node name="Pontoon" type="Marker3D" unique_id=1820314727]
 script = ExtResource("1_swwqf")

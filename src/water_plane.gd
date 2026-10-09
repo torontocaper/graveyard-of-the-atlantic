@@ -3,10 +3,6 @@ class_name WaterPlane
 extends MeshInstance3D
 ## Procedurally generated water mesh
 
-#region Constants
-#const TOON_WATER = preload("uid://cg56rup1h1eot")
-#endregion
-
 #region Properties
 var water_properties : Dictionary:
 	set(value):
@@ -20,10 +16,7 @@ var water_properties : Dictionary:
 #endregion
 
 #region Methods
-func _ready() -> void:
-	pass
-	
-## Create the water plane
+## Update the water plane
 func update_water_plane(size : Vector2, resolution : Vector2i, jitter : float, base_color : Color) -> void:
 	# Create the PlaneMesh primitive and assign it the size and resolution values
 	var new_plane_mesh := PlaneMesh.new()
@@ -74,5 +67,4 @@ func update_water_plane(size : Vector2, resolution : Vector2i, jitter : float, b
 	# Update the shader
 	var water_shader = material_override as ShaderMaterial
 	water_shader.set_shader_parameter("water_color", base_color)
-
 #endregion

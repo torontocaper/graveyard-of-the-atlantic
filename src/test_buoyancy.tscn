@@ -37,11 +37,3 @@ water_plane_jitter = 0.5
 water_plane_base_color = Color(0.105882354, 0.13725491, 0.7058824, 1)
 
 [node name="Rowboat3D" parent="." unique_id=2022103872 instance=ExtResource("5_f4q1m")]
-mass = 10.0
-row_power = 80.0
-
-[node name="Camera3D" type="Camera3D" parent="Rowboat3D" unique_id=1359731987]
-transform = Transform3D(1, 0, 0, 0, 0.86602545, 0.5, 0, -0.5, 0.86602545, 0, 2.8874257, 4)
-visible = false
-near = 1.48
-far = 200.0

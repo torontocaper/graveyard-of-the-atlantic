@@ -3,14 +3,12 @@
 [ext_resource type="Script" uid="uid://c1nmvm7kk8ho4" path="res://src/rowboat.gd" id="2_f5osq"]
 [ext_resource type="Shape3D" uid="uid://bfrswf1q3vvbm" path="res://resources/collider_rowboat_small.tres" id="2_k3878"]
 [ext_resource type="ArrayMesh" uid="uid://ce620fyjn62ff" path="res://resources/mesh_rowboat_small.tres" id="3_cf8e6"]
-[ext_resource type="PackedScene" uid="uid://cy6apcmk45c2d" path="res://src/pontoon.tscn" id="4_cf8e6"]
+[ext_resource type="PackedScene" uid="uid://hrvf87m8m145" path="res://src/buoyancy_component.tscn" id="4_cf8e6"]
 
-[node name="Rowboat3D" type="RigidBody3D" unique_id=2022103872 node_paths=PackedStringArray("pontoons")]
+[node name="Rowboat3D" type="RigidBody3D" unique_id=2022103872 node_paths=PackedStringArray("buoyancy_component")]
 collision_mask = 2
-mass = 50.0
-angular_damp = 5.0
 script = ExtResource("2_f5osq")
-pontoons = [NodePath("Pontoon"), NodePath("Pontoon2"), NodePath("Pontoon3")]
+buoyancy_component = NodePath("BuoyancyComponent")
 
 [node name="RowboatCollider" type="CollisionShape3D" parent="." unique_id=1355817582]
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
@@ -20,18 +18,6 @@ shape = ExtResource("2_k3878")
 transform = Transform3D(-1, 0, 8.742278e-08, 0, 1, 0, -8.742278e-08, 0, -1, 0, 0, 0)
 mesh = ExtResource("3_cf8e6")
 
-[node name="Pontoon" parent="." unique_id=795425991 node_paths=PackedStringArray("parent") instance=ExtResource("4_cf8e6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.015695125, -0.76515675)
-parent = NodePath("..")
-
-[node name="Pontoon2" parent="." unique_id=83095412 node_paths=PackedStringArray("parent") instance=ExtResource("4_cf8e6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6090301, 0.15121433, 0.7)
-parent = NodePath("..")
-
-[node name="Pontoon3" parent="." unique_id=1833632775 node_paths=PackedStringArray("parent") instance=ExtResource("4_cf8e6")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6056748, 0.15121433, 0.7)
-parent = NodePath("..")
-
 [node name="SpringArm3D" type="SpringArm3D" parent="." unique_id=1596014818]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 3, 3)
 collision_mask = 2
@@ -40,4 +26,20 @@ spring_length = 2.0
 [node name="Camera3D" type="Camera3D" parent="SpringArm3D" unique_id=211528407]
 transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 0, 0)
 current = true
+near = 1.5
 far = 200.0
+
+[node name="BuoyancyComponent" parent="." unique_id=1778515853 node_paths=PackedStringArray("parent") instance=ExtResource("4_cf8e6")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.3, 0)
+parent = NodePath("..")
+
+[node name="Pontoon" parent="BuoyancyComponent" index="0" unique_id=1820314727]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.6, 0, 1)
+
+[node name="Pontoon2" parent="BuoyancyComponent" index="1" unique_id=833768949]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.6, 0, 1)
+
+[node name="Pontoon3" parent="BuoyancyComponent" index="2" unique_id=639170744]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.75)
+
+[editable path="BuoyancyComponent"]

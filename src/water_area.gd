@@ -17,6 +17,9 @@ extends Area3D
 @export var force_multiplier_buoyancy : float = 200.0
 @export var force_multiplier_drag : float = 20.0
 
+var elapsed_time : float = 0.0
+var water_shader : ShaderMaterial
+
 @onready var water_plane: WaterPlane = $WaterPlane
 
 func _ready() -> void:
@@ -28,18 +31,22 @@ func _ready() -> void:
 	}
 	body_entered.connect(on_body_entered)
 	body_exited.connect(on_body_exited)
+	water_shader = water_plane.get_active_material(0)
+
+func _process(delta: float) -> void:
+	if water_shader:
+		elapsed_time += delta
+		water_shader.set_shader_parameter("elapsed_time", elapsed_time)
 
 func on_body_entered(body : Node3D) -> void:
 	print_debug("Water Area %s has detected %s entering" % [name, body.name])
-	if body is Rowboat:
-		for pontoon in body.pontoons:
-			pontoon.water_area = self
+	if body is FloatableBody:
+		body.water_area = self
 
 func on_body_exited(body : Node3D) -> void:
 	print_debug("Water Area %s has detected %s exiting" % [name, body.name])
-	if body is Rowboat:
-		for pontoon in body.pontoons:
-			pontoon.water_area = null
+	if body is FloatableBody:
+		body.water_area = null
 
 func update_water_properties() -> void:
 	water_plane.water_properties = {
@@ -49,7 +56,9 @@ func update_water_properties() -> void:
 		"water_base_color" = water_plane_base_color,
 	}
 
-func get_water_height_at_position(_position_x : float, _position_z : float) -> float:
-	var height = 0
-	# do some stuff
+func get_water_height_at_position(position_x : float, position_z : float) -> float:
+	var x_wave_value : float = 0.1 * sin(position_x + elapsed_time)
+	var z_wave_value : float = 0.15 * sin(position_z + elapsed_time)
+	var diagonal_wave_value : float = 0.2 * sin(position_x + position_z + elapsed_time)
+	var height : float = x_wave_value + z_wave_value + diagonal_wave_value
 	return height

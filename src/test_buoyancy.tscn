@@ -18,6 +18,10 @@ sky_material = SubResource("ProceduralSkyMaterial_jmhuu")
 [sub_resource type="Environment" id="Environment_sgkto"]
 background_mode = 2
 sky = SubResource("Sky_2ht3r")
+fog_enabled = true
+fog_sky_affect = 0.328
+volumetric_fog_enabled = true
+volumetric_fog_sky_affect = 0.725
 
 [node name="TestBuoyancy" type="Node3D" unique_id=1846730698]
 
@@ -25,7 +29,7 @@ sky = SubResource("Sky_2ht3r")
 environment = SubResource("Environment_sgkto")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=206087874]
-transform = Transform3D(-0.944016, -0.24130079, -0.22496155, -0.31515658, 0.8612058, 0.39874908, 0.097519726, 0.44732362, -0.88903964, 0, 0, 0)
+transform = Transform3D(-0.9440161, -0.24130084, -0.2249616, -0.30273324, 0.904608, 0.30006194, 0.13109681, 0.35136664, -0.9270142, 0, 0, 0)
 light_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
 light_energy = 16.0
 shadow_enabled = true

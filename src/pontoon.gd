@@ -1,4 +1,4 @@
-@tool
+#@tool
 class_name Pontoon
 extends Marker3D
 
@@ -17,7 +17,16 @@ var is_submerged : bool = false:
 				false:
 					emerged.emit()
 
-var depth : float
+var depth : float:
+	set(value):
+		if value >= 0.0:
+			depth = value
+			is_submerged = true
+		else:
+			depth = 0.0
+			is_submerged = false
+
+
 var water_area : WaterArea
 var water_height : float = 0.0
 
@@ -28,7 +37,3 @@ func update_depth() -> void:
 func _physics_process(_delta: float) -> void:
 	if water_area:
 		update_depth()
-		if depth >= 0:
-			is_submerged = true
-		else:
-			is_submerged = false

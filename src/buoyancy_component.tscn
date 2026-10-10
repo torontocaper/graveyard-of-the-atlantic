@@ -3,9 +3,8 @@
 [ext_resource type="Script" uid="uid://n40awd4evhvl" path="res://src/buoyancy_component.gd" id="1_ncv7v"]
 [ext_resource type="PackedScene" uid="uid://cy6apcmk45c2d" path="res://src/pontoon.tscn" id="2_ncv7v"]
 
-[node name="BuoyancyComponent" type="Marker3D" unique_id=237152146 node_paths=PackedStringArray("pontoons")]
+[node name="BuoyancyComponent" type="Marker3D" unique_id=237152146]
 script = ExtResource("1_ncv7v")
-pontoons = [NodePath("Pontoon2"), NodePath("Pontoon2"), NodePath("Pontoon3")]
 
 [node name="Pontoon" parent="." unique_id=1820314727 instance=ExtResource("2_ncv7v")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 1)

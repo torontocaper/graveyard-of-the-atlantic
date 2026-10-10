@@ -1,6 +1,6 @@
 # Graveyard of the Atlantic
 
-Submission for Trijam 340 ("Lighthouse")
+Submission for Trijam 340 ("Lighthouse") that I'm trying to turn into a larger project.
 
 ## Attributions
 

@@ -26,7 +26,6 @@ var depth : float:
 			depth = 0.0
 			is_submerged = false
 
-
 var water_area : WaterArea
 var water_height : float = 0.0
 

@@ -2,7 +2,9 @@ shader_type spatial;
 //render_mode specular_toon;
 
 uniform float elapsed_time = 0.0;
-uniform vec4 water_color : source_color; 
+uniform vec4 water_color : source_color;
+
+//varying vec3 new_normal;
 
 float get_height_offset(float x_coord, float z_coord) {
 	float x_wave_value = 0.1 * sin(x_coord + elapsed_time);
@@ -20,5 +22,6 @@ void fragment() {
 	ALPHA = 0.99;
 	ROUGHNESS = 0.15;
 	SPECULAR = 1.0;
-	NORMAL = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
+	vec3 new_normal = normalize(cross(dFdy(VERTEX), dFdx(VERTEX)));
+	NORMAL = new_normal;
 }

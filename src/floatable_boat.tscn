@@ -1,0 +1,9 @@
+[gd_scene format=3 uid="uid://dgweeaw4n1sd0"]
+
+[ext_resource type="PackedScene" uid="uid://dghc52534gnd6" path="res://src/floatable_body.tscn" id="1_ddnte"]
+[ext_resource type="Script" uid="uid://c1nmvm7kk8ho4" path="res://src/floatable_boat.gd" id="2_3xa8e"]
+
+[node name="FloatableBoat" unique_id=1215530219 instance=ExtResource("1_ddnte")]
+script = ExtResource("2_3xa8e")
+row_power = 25.0
+turn_power = 5.0

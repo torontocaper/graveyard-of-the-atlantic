@@ -36,14 +36,15 @@ shadow_enabled = true
 shadow_blur = 0.0
 
 [node name="WaterArea" parent="." unique_id=905625047 instance=ExtResource("2_2ht3r")]
-water_plane_size = Vector2(100, 100)
-water_plane_resolution = Vector2i(100, 100)
+water_plane_size = Vector2(20, 20)
+water_plane_resolution = Vector2i(20, 20)
 water_plane_jitter = 0.5
 water_plane_base_color = Color(0.105882354, 0.13725491, 0.7058824, 1)
 
 [node name="FloatableBody" parent="." unique_id=198053734 instance=ExtResource("4_sgkto")]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 10, 0)
-mass = 1200.0
+transform = Transform3D(1.0000001, 0, 0, 0, 1.0000001, 0, 0, 0, 1, 0, 10, 0)
+mass = 1025.0
+custom_integrator = true
 
 [node name="Camera3D" type="Camera3D" parent="FloatableBody" unique_id=1434574005]
 transform = Transform3D(0.99991435, -0.0040449584, 0.012449096, 0, 0.9510565, 0.30901712, -0.013089755, -0.30899066, 0.950975, 0.17565903, 2.4382374, 6.1563673)

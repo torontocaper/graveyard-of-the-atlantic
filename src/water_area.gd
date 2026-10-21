@@ -13,9 +13,9 @@ extends Area3D
 @export var water_plane_jitter : float = 0.1 ## Amount of randomness applied to each vertex in the [WaterPlane]
 @export var water_plane_base_color : Color = Color.MIDNIGHT_BLUE ## Base color of the [WaterPlane]
 
-@export_group("Forces", "force_")
-@export var force_multiplier_buoyancy : float = 200.0
-@export var force_multiplier_drag : float = 20.0
+#@export_group("Forces", "force_")
+#@export var force_multiplier_buoyancy : float = 200.0
+#@export var force_multiplier_drag : float = 20.0
 
 var elapsed_time : float = 0.0
 var water_shader : ShaderMaterial

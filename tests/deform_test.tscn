@@ -1,0 +1,81 @@
+[gd_scene format=3 uid="uid://cnm6cvy4yha0p"]
+
+[ext_resource type="Script" uid="uid://b7ccp8gmhhog7" path="res://tests/water_area_3d.gd" id="1_6qjul"]
+[ext_resource type="Script" uid="uid://cnxcfx5iwudls" path="res://tests/water_surface.gd" id="1_of64j"]
+[ext_resource type="Script" uid="uid://c0jmx5ebraepu" path="res://tests/deformer.gd" id="2_laxxc"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_k4ags"]
+sky_top_color = Color(0.4117647, 0.4117647, 0.4117647, 1)
+sky_horizon_color = Color(0.9095798, 0.96840334, 1.0174229, 1)
+ground_bottom_color = Color(0.27450982, 0.50980395, 0.7058824, 1)
+ground_horizon_color = Color(0.9095798, 0.96840334, 1.0174229, 1)
+
+[sub_resource type="Sky" id="Sky_of64j"]
+sky_material = SubResource("ProceduralSkyMaterial_k4ags")
+
+[sub_resource type="Environment" id="Environment_laxxc"]
+background_mode = 2
+sky = SubResource("Sky_of64j")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_6qjul"]
+transparency = 1
+albedo_color = Color(0, 1, 1, 0.47058824)
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_laxxc"]
+material = SubResource("StandardMaterial3D_6qjul")
+size = Vector3(10, 1, 10)
+subdivide_width = 20
+subdivide_height = 2
+subdivide_depth = 20
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_laxxc"]
+size = Vector3(10, 1, 10)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7a2v"]
+albedo_color = Color(0.19793725, 0.19793722, 0.19793722, 1)
+metallic = 1.0
+roughness = 0.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_dsc2w"]
+material = SubResource("StandardMaterial3D_e7a2v")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_dsc2w"]
+
+[node name="DeformTest" type="Node3D" unique_id=595642972]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=2084517999]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=1112215959]
+environment = SubResource("Environment_laxxc")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=161251685]
+transform = Transform3D(1, 0, 0, 0, 0.8660254, 0.5, 0, -0.5, 0.8660254, 0, 4, 8)
+
+[node name="WaterArea3D" type="Area3D" parent="." unique_id=1749767483]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.5, 0)
+script = ExtResource("1_6qjul")
+
+[node name="WaterMesh" type="MeshInstance3D" parent="WaterArea3D" unique_id=472399942]
+mesh = SubResource("BoxMesh_laxxc")
+skeleton = NodePath("../..")
+script = ExtResource("1_of64j")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="WaterArea3D" unique_id=672555490]
+shape = SubResource("BoxShape3D_laxxc")
+
+[node name="Deformer" type="CharacterBody3D" parent="." unique_id=296812180]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, 0)
+script = ExtResource("2_laxxc")
+
+[node name="DeformerMesh" type="MeshInstance3D" parent="Deformer" unique_id=314236501]
+mesh = SubResource("BoxMesh_dsc2w")
+skeleton = NodePath("../..")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Deformer" unique_id=1092276372]
+shape = SubResource("BoxShape3D_dsc2w")
+
+[connection signal="body_entered" from="WaterArea3D" to="WaterArea3D" method="_on_body_entered"]
+[connection signal="input_event" from="Deformer" to="Deformer" method="_on_input_event"]

@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://bkfeoxxjwv5np"]
 
-[ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/rowboat.tscn" id="1_pt5w0"]
-[ext_resource type="Script" uid="uid://3xubrx517lu6" path="res://src/immediate_water.gd" id="4_6e3tk"]
+[ext_resource type="PackedScene" uid="uid://ddle7vj52a7s6" path="res://src/boats/rowboat.tscn" id="1_pt5w0"]
+[ext_resource type="Script" uid="uid://3xubrx517lu6" path="res://src/water/immediate_water.gd" id="4_6e3tk"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_0mubu"]
 sky_horizon_color = Color(0.66224277, 0.6717428, 0.6867428, 1)

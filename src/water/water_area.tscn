@@ -1,8 +1,8 @@
 [gd_scene format=4 uid="uid://nsly1pc68web"]
 
-[ext_resource type="Script" uid="uid://c27qghfsvjqsn" path="res://src/water_area.gd" id="1_e5dsi"]
-[ext_resource type="Shader" uid="uid://d002w1wx3mkli" path="res://src/water_plane.gdshader" id="2_mkk8m"]
-[ext_resource type="Script" uid="uid://dkyvj08v7rq5x" path="res://src/water_plane.gd" id="3_nml7j"]
+[ext_resource type="Script" uid="uid://c27qghfsvjqsn" path="res://src/water/water_area.gd" id="1_e5dsi"]
+[ext_resource type="Shader" uid="uid://d002w1wx3mkli" path="res://resources/water_plane.gdshader" id="2_mkk8m"]
+[ext_resource type="Script" uid="uid://dkyvj08v7rq5x" path="res://src/water/water_plane.gd" id="3_nml7j"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
 render_priority = 0

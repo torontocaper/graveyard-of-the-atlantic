@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://cmlk7vshgp5dd"]
 
-[ext_resource type="Shader" uid="uid://i70cnbjo6gn" path="res://src/landmass.gdshader" id="1_8jb3l"]
-[ext_resource type="Script" uid="uid://bkh07fuc3ecdr" path="res://src/landmass.gd" id="2_sofgi"]
+[ext_resource type="Shader" uid="uid://i70cnbjo6gn" path="res://resources/landmass.gdshader" id="1_8jb3l"]
+[ext_resource type="Script" uid="uid://bkh07fuc3ecdr" path="res://src/environment/landmass.gd" id="2_sofgi"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_f4q1m"]
 render_priority = 0

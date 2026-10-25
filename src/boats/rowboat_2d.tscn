@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://bk35cdvcaaff6"]
 
 [ext_resource type="Texture2D" uid="uid://ywyb2hfa6mm3" path="res://assets/sprites/dinghyLarge1.png" id="1_btiuf"]
-[ext_resource type="Script" uid="uid://b6okrj8w7uay5" path="res://src/rowboat_2d.gd" id="1_uhro4"]
-[ext_resource type="PackedScene" uid="uid://cihuu2autljpg" path="res://src/oar.tscn" id="2_k5vbf"]
+[ext_resource type="Script" uid="uid://b6okrj8w7uay5" path="res://src/boats/rowboat_2d.gd" id="1_uhro4"]
+[ext_resource type="PackedScene" uid="uid://cihuu2autljpg" path="res://src/boats/oar.tscn" id="2_k5vbf"]
 
 [node name="Rowboat2D" type="RigidBody2D" unique_id=1146708961]
 script = ExtResource("1_uhro4")

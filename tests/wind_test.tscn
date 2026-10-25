@@ -1,0 +1,57 @@
+[gd_scene format=3 uid="uid://clqad6ghmlslm"]
+
+[ext_resource type="PackedScene" uid="uid://bfrgpjvx28l3u" path="res://tests/wind_area.tscn" id="1_1glrm"]
+[ext_resource type="PackedScene" uid="uid://ctblvro7rt7fi" path="res://tests/raft.tscn" id="2_q0wkm"]
+
+[sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_qg7pw"]
+sky_top_color = Color(0.11764706, 0.5647059, 1, 1)
+ground_bottom_color = Color(0.27450982, 0.50980395, 0.7058824, 1)
+ground_horizon_color = Color(0.9095798, 0.96840334, 1.0174229, 1)
+
+[sub_resource type="Sky" id="Sky_qs6sb"]
+sky_material = SubResource("ProceduralSkyMaterial_qg7pw")
+
+[sub_resource type="Environment" id="Environment_q0wkm"]
+background_mode = 2
+sky = SubResource("Sky_qs6sb")
+
+[node name="Node3D" type="Node3D" unique_id=668359239]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1186530690]
+transform = Transform3D(-0.8660254, -0.43301278, 0.25, 0, 0.49999997, 0.86602545, -0.50000006, 0.75, -0.43301266, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="." unique_id=170601872]
+environment = SubResource("Environment_q0wkm")
+
+[node name="Camera3D" type="Camera3D" parent="." unique_id=224409662]
+transform = Transform3D(0.9588189, -0.11552049, 0.25946358, 0, 0.9135456, 0.40673625, -0.2840182, -0.38998643, 0.8759248, 1.6696389, 2.0601962, 3.2283676)
+
+[node name="WindArea" parent="." unique_id=1113836808 instance=ExtResource("1_1glrm")]
+wind_force_magnitude = 10.0
+wind_attenuation_factor = 1.0
+
+[node name="Raft" parent="." unique_id=995155803 instance=ExtResource("2_q0wkm")]
+mass = 1.0
+
+[node name="CompassLabels" type="Node3D" parent="." unique_id=1721031822]
+
+[node name="North" type="Label3D" parent="CompassLabels" unique_id=1937858564]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1.5)
+billboard = 1
+text = "NORTH"
+
+[node name="South" type="Label3D" parent="CompassLabels" unique_id=1358841465]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 0, 1.5)
+billboard = 1
+text = "SOUTH"
+
+[node name="East" type="Label3D" parent="CompassLabels" unique_id=2120652552]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 1.5, 0, 0)
+billboard = 1
+text = "EAST"
+
+[node name="West" type="Label3D" parent="CompassLabels" unique_id=1928873232]
+transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, -1.5, 0, 0)
+billboard = 1
+text = "WEST"

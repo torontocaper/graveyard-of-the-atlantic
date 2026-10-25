@@ -1,6 +1,6 @@
 [gd_resource type="PlaneMesh" format=3 uid="uid://bwxxfqd1vhn5a"]
 
-[ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://src/water.gdshader" id="1_e84e4"]
+[ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://resources/water.gdshader" id="1_e84e4"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0mubu"]
 render_priority = 0

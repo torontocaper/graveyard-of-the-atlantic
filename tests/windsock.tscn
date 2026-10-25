@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://d0wlp7dgndh4j"]
+
+[sub_resource type="Gradient" id="Gradient_u2cbb"]
+interpolation_mode = 1
+offsets = PackedFloat32Array(0, 0.5)
+colors = PackedColorArray(1, 0, 0, 1, 1, 1, 1, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_q0wkm"]
+gradient = SubResource("Gradient_u2cbb")
+fill_from = Vector2(1, 0.1)
+repeat = 2
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_u2cbb"]
+albedo_texture = SubResource("GradientTexture2D_q0wkm")
+
+[sub_resource type="SphereMesh" id="SphereMesh_q0wkm"]
+material = SubResource("StandardMaterial3D_u2cbb")
+radial_segments = 16
+rings = 8
+
+[node name="Windsock" type="SoftBody3D" unique_id=1604981056]
+mesh = SubResource("SphereMesh_q0wkm")

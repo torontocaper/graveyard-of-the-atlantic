@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://ddle7vj52a7s6"]
 
-[ext_resource type="Script" uid="uid://c1nmvm7kk8ho4" path="res://src/floatable_boat.gd" id="2_f5osq"]
+[ext_resource type="Script" uid="uid://c1nmvm7kk8ho4" path="res://src/buoyancy/floatable_boat.gd" id="2_f5osq"]
 [ext_resource type="Shape3D" uid="uid://bfrswf1q3vvbm" path="res://resources/collider_rowboat_small.tres" id="2_k3878"]
 [ext_resource type="ArrayMesh" uid="uid://ce620fyjn62ff" path="res://resources/mesh_rowboat_small.tres" id="3_cf8e6"]
 

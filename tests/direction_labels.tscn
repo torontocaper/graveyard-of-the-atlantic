@@ -1,0 +1,41 @@
+[gd_scene format=3 uid="uid://f02j1xfw7ctc"]
+
+[node name="DirectionLabels" type="Node3D" unique_id=1213876832]
+
+[node name="LabelTop" type="Label3D" parent="." unique_id=926434446]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+billboard = 1
+no_depth_test = true
+text = "TOP"
+
+[node name="LabelBottom" type="Label3D" parent="." unique_id=219197657]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -1, 0)
+billboard = 1
+no_depth_test = true
+text = "BOTTOM"
+
+[node name="LabelFront" type="Label3D" parent="." unique_id=1002881986]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -1)
+billboard = 1
+no_depth_test = true
+text = "FRONT
+"
+
+[node name="LabelBack" type="Label3D" parent="." unique_id=1481508695]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 1)
+billboard = 1
+no_depth_test = true
+text = "BACK
+"
+
+[node name="LabelRight" type="Label3D" parent="." unique_id=818608090]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+billboard = 1
+no_depth_test = true
+text = "RIGHT"
+
+[node name="LabelLeft" type="Label3D" parent="." unique_id=623313436]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+billboard = 1
+no_depth_test = true
+text = "LEFT"

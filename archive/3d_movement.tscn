@@ -1,10 +1,10 @@
 [gd_scene format=4 uid="uid://c0bspi8l275hg"]
 
-[ext_resource type="PackedScene" uid="uid://m3g80ouamfem" path="res://src/player_boat_3d.tscn" id="1_io1bl"]
+[ext_resource type="PackedScene" uid="uid://m3g80ouamfem" path="res://src/boats/player_boat_3d.tscn" id="1_io1bl"]
 [ext_resource type="PackedScene" uid="uid://8akpodld7xdq" path="res://src/ui.tscn" id="2_xb7om"]
-[ext_resource type="PackedScene" uid="uid://wa0310kj7mpc" path="res://src/lighthouse.tscn" id="3_wtk8s"]
-[ext_resource type="Script" uid="uid://ddhtnhl2ltbro" path="res://src/wave_manager.gd" id="4_a1khm"]
-[ext_resource type="PackedScene" uid="uid://ra3g8dad1kml" path="res://src/ocean.tscn" id="4_at5x4"]
+[ext_resource type="PackedScene" uid="uid://wa0310kj7mpc" path="res://src/environment/lighthouse.tscn" id="3_wtk8s"]
+[ext_resource type="Script" uid="uid://ddhtnhl2ltbro" path="res://src/globals/wave_manager.gd" id="4_a1khm"]
+[ext_resource type="PackedScene" uid="uid://ra3g8dad1kml" path="res://src/water/ocean.tscn" id="4_at5x4"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_at5x4"]
 sky_top_color = Color(0.105882354, 0.12156863, 0.14117648, 1)

@@ -1,7 +1,7 @@
 [gd_scene format=4 uid="uid://ra3g8dad1kml"]
 
 [ext_resource type="Shader" uid="uid://bka1b7befmthu" path="res://resources/ocean_shader.gdshader" id="1_j38dg"]
-[ext_resource type="Script" uid="uid://qeseqet76k8r" path="res://src/ocean.gd" id="2_nb2vx"]
+[ext_resource type="Script" uid="uid://qeseqet76k8r" path="res://src/water/ocean.gd" id="2_nb2vx"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_at5x4"]
 render_priority = 0

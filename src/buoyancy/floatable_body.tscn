@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://dghc52534gnd6"]
 
-[ext_resource type="Script" uid="uid://cembulwayvpro" path="res://src/floatable_body.gd" id="1_qjmcq"]
+[ext_resource type="Script" uid="uid://cembulwayvpro" path="res://src/buoyancy/floatable_body.gd" id="1_qjmcq"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qjmcq"]
 

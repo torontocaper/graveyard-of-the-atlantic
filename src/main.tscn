@@ -1,8 +1,8 @@
 [gd_scene format=3 uid="uid://u8sfsqyn1w1w"]
 
-[ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://src/water.gdshader" id="1_eewff"]
-[ext_resource type="Script" uid="uid://dqo7xc8xq0s5l" path="res://src/water.gd" id="2_gh0ne"]
-[ext_resource type="PackedScene" uid="uid://wa0310kj7mpc" path="res://src/lighthouse.tscn" id="3_5q4o7"]
+[ext_resource type="Shader" uid="uid://dtkbr131od8p8" path="res://resources/water.gdshader" id="1_eewff"]
+[ext_resource type="Script" uid="uid://dqo7xc8xq0s5l" path="res://src/water/water.gd" id="2_gh0ne"]
+[ext_resource type="PackedScene" uid="uid://wa0310kj7mpc" path="res://src/environment/lighthouse.tscn" id="3_5q4o7"]
 
 [sub_resource type="Gradient" id="Gradient_fyndt"]
 interpolation_mode = 1

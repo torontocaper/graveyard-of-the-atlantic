@@ -1,7 +1,7 @@
 [gd_scene format=3 uid="uid://hrvf87m8m145"]
 
-[ext_resource type="Script" uid="uid://n40awd4evhvl" path="res://src/buoyancy_component.gd" id="1_ncv7v"]
-[ext_resource type="PackedScene" uid="uid://cy6apcmk45c2d" path="res://src/pontoon.tscn" id="2_ncv7v"]
+[ext_resource type="Script" uid="uid://n40awd4evhvl" path="res://src/buoyancy/buoyancy_component.gd" id="1_ncv7v"]
+[ext_resource type="PackedScene" uid="uid://cy6apcmk45c2d" path="res://src/buoyancy/pontoon.tscn" id="2_ncv7v"]
 
 [node name="BuoyancyComponent" type="Marker3D" unique_id=237152146]
 script = ExtResource("1_ncv7v")

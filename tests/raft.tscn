@@ -1,0 +1,109 @@
+[gd_scene format=3 uid="uid://ctblvro7rt7fi"]
+
+[ext_resource type="Texture2D" uid="uid://cr6bq1pdhcf7g" path="res://icon.svg" id="1_11hgx"]
+[ext_resource type="Script" uid="uid://bbky2cws3gdst" path="res://tests/raft.gd" id="1_xjby6"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_qs6sb"]
+albedo_color = Color(0.54509807, 0.27058825, 0.07450981, 1)
+
+[sub_resource type="BoxMesh" id="BoxMesh_dsc2w"]
+material = SubResource("StandardMaterial3D_qs6sb")
+size = Vector3(1.5, 0.2, 2)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_e7a2v"]
+size = Vector3(1.5, 0.2, 2)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_q0wkm"]
+albedo_color = Color(0.8235294, 0.7058824, 0.54901963, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_qs6sb"]
+material = SubResource("StandardMaterial3D_q0wkm")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.5
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_qs6sb"]
+height = 1.5
+radius = 0.05
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_11hgx"]
+material = SubResource("StandardMaterial3D_q0wkm")
+top_radius = 0.05
+bottom_radius = 0.05
+height = 1.0
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_11hgx"]
+height = 1.0
+radius = 0.05
+
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_xjby6"]
+height = 1.0
+radius = 0.05
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_e7a2v"]
+cull_mode = 2
+albedo_texture = ExtResource("1_11hgx")
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_dsc2w"]
+material = SubResource("StandardMaterial3D_e7a2v")
+size = Vector2(1, 1)
+subdivide_width = 7
+subdivide_depth = 7
+
+[node name="Raft" type="RigidBody3D" unique_id=995155803]
+mass = 50.0
+script = ExtResource("1_xjby6")
+
+[node name="RaftBody" type="MeshInstance3D" parent="." unique_id=1692731522]
+mesh = SubResource("BoxMesh_dsc2w")
+
+[node name="RaftBodyCollider" type="CollisionShape3D" parent="." unique_id=1594078422]
+shape = SubResource("BoxShape3D_e7a2v")
+
+[node name="Mast" type="MeshInstance3D" parent="." unique_id=718492121]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.4)
+mesh = SubResource("CylinderMesh_qs6sb")
+
+[node name="MastCollider" type="CollisionShape3D" parent="." unique_id=1567218666]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.8, -0.4)
+shape = SubResource("CylinderShape3D_qs6sb")
+
+[node name="TopYard" type="MeshInstance3D" parent="." unique_id=164487892]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.4969385, -0.4469976)
+mesh = SubResource("CylinderMesh_11hgx")
+
+[node name="TopYardCollider" type="CollisionShape3D" parent="." unique_id=993242582]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 1.4969385, -0.4469976)
+shape = SubResource("CylinderShape3D_11hgx")
+
+[node name="BottomYard" type="MeshInstance3D" parent="." unique_id=217877071]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5096418, -0.4469976)
+mesh = SubResource("CylinderMesh_11hgx")
+
+[node name="BottomYardCollider" type="CollisionShape3D" parent="." unique_id=1190428091]
+transform = Transform3D(-4.371139e-08, -1, 0, 1, -4.371139e-08, 0, 0, 0, 1, 0, 0.5096418, -0.4469976)
+shape = SubResource("CylinderShape3D_xjby6")
+
+[node name="Sail" type="SoftBody3D" parent="." unique_id=828753619]
+transform = Transform3D(1, 0, 0, 0, 1.3113416e-07, -1, 0, 1, 1.3113416e-07, 0, 0.993423, -0.50827086)
+mesh = SubResource("PlaneMesh_dsc2w")
+linear_stiffness = 0.02
+pinned_points = [8, 4, 0, 76, 80, 72]
+attachments/0/point_index = 8
+attachments/0/spatial_attachment_path = NodePath("../BottomYard")
+attachments/0/offset = Vector3(-0.016218811, 0.49999997, -0.06127318)
+attachments/1/point_index = 4
+attachments/1/spatial_attachment_path = NodePath("../BottomYard")
+attachments/1/offset = Vector3(-0.016218841, 7.0894757e-10, -0.06127318)
+attachments/2/point_index = 0
+attachments/2/spatial_attachment_path = NodePath("../BottomYard")
+attachments/2/offset = Vector3(-0.016218841, -0.5, -0.06127318)
+attachments/3/point_index = 76
+attachments/3/spatial_attachment_path = NodePath("../TopYard")
+attachments/3/offset = Vector3(-0.003515482, 1.5366197e-10, -0.061273314)
+attachments/4/point_index = 80
+attachments/4/spatial_attachment_path = NodePath("../TopYard")
+attachments/4/offset = Vector3(-0.003515482, 0.5, -0.061273314)
+attachments/5/point_index = 72
+attachments/5/spatial_attachment_path = NodePath("../TopYard")
+attachments/5/offset = Vector3(-0.0035155118, -0.49999997, -0.061273314)

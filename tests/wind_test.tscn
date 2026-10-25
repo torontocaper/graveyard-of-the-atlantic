@@ -30,6 +30,7 @@ transform = Transform3D(0.9588189, -0.11552049, 0.25946358, 0, 0.9135456, 0.4067
 [node name="WindArea" parent="." unique_id=1113836808 instance=ExtResource("1_1glrm")]
 wind_force_magnitude = 10.0
 wind_attenuation_factor = 1.0
+wind_source_path = NodePath("WindArrow")
 
 [node name="Raft" parent="." unique_id=995155803 instance=ExtResource("2_q0wkm")]
 mass = 1.0

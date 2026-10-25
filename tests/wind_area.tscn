@@ -8,7 +8,6 @@ size = Vector3(100, 10, 100)
 
 [node name="WindArea" type="Area3D" unique_id=1113836808]
 wind_force_magnitude = 5.0
-wind_source_path = NodePath("WindArrow")
 script = ExtResource("1_itvcg")
 
 [node name="WindShape" type="CollisionShape3D" parent="." unique_id=1183066442]
@@ -16,5 +15,6 @@ shape = SubResource("BoxShape3D_dsc2w")
 debug_color = Color(1, 0.84313726, 0, 1)
 
 [node name="WindArrow" parent="." unique_id=1830173614 instance=ExtResource("2_2p74a")]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
 
 [connection signal="body_entered" from="." to="." method="_on_body_entered"]
